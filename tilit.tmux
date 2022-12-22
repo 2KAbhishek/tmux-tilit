@@ -199,13 +199,13 @@ else
         kill-pane
 fi
 
-# Close a connection with Alt + Shift + e.
-tmux $bind "${mod}e" \
+# Close a connection with Alt + d.
+tmux $bind "${mod}d \
     confirm-before -p "Detach from #H:#S? (y/n)" detach-client
 
-# Reload configuration with Alt + Shift + c.
-tmux $bind "${mod}c" \
-    source-file ~/.tmux.conf \\\; display "Reloaded config"
+# Reload configuration with Alt + r.
+tmux $bind "${mod}r" \
+    source-file ~/.tmux.conf \\\; display "Config reloaded"
 # }}}
 
 # Define hooks {{{
