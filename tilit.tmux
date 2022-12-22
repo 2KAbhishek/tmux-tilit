@@ -187,9 +187,9 @@ fi
 tmux $bind "${mod}n" \
     command-prompt -p 'Workspace name:' 'rename-window "%%"'
 
-# Close a window with Alt + Shift + q.
+# Close a window with Alt + x
 if [ -z "$legacy" ]; then
-    tmux $bind "${mod}q" \
+    tmux $bind "${mod}x" \
         if-shell \
         '[ "$(tmux display-message -p "#{window_panes}")" -gt 1 ]' \
         'kill-pane; select-layout; select-layout -E' \
