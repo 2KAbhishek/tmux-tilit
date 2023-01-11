@@ -23,7 +23,7 @@
 <h3>Better tiling for tmux 🪟🪓</h3>
 
 <figure>
-  <img src= "images/screenshot.jpg" alt="tmux-tilit Demo">
+  <img src= "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3p6b2sqivrf1xajhbh27.jpg" alt="tmux-tilit Demo">
   <br/>
   <figcaption>tmux-tilit screenshot</figcaption>
 </figure>
@@ -104,7 +104,8 @@ Hit the ⭐ button if you found this useful.
 
 ## More Info
 
-[tmux-tilish](https://github.com/jabirali/tmux-tilish)
+Major credits to [tmux-tilish](https://github.com/jabirali/tmux-tilish)
+Also checkout the nice powerline plugin you see on the screenshot, [tmux2k](https://github.com/2KAbhishek/tmux2k)
 
 <div align="center">
 
