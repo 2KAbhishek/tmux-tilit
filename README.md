@@ -37,7 +37,7 @@ tmux-tilit is a tmux plugin that adds tiling window manager like features and ke
 ## Inspiration
 
 tmux-tilit was inspired by [tmux-tilish](https://github.com/jabirali/tmux-tilish).
-I wanted to make the keybindings match better with tmux's defaults, hence tilit was born!
+I wanted to add some new commadns, make the keybindings match better with tmux's defaults, hence tilit was born!
 
 ## Prerequisites
 
