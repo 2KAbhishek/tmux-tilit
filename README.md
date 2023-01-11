@@ -20,7 +20,7 @@
 <a href="https://github.com/2KAbhishek/tmux-tilit/pulse">
 <img alt="Last Updated" src="https://img.shields.io/github/last-commit/2kabhishek/tmux-tilit?style=flat&color=e06c75&label="> </a>
 
-<h3>Tile your terminal 🪟🪓</h3>
+<h3>Better tiling for tmux 🪟🪓</h3>
 
 <figure>
   <img src= "images/screenshot.jpg" alt="tmux-tilit Demo">
