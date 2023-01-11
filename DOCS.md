@@ -15,7 +15,7 @@ instead of <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
 The plugin has been verified to work on `tmux` v1.9, v2.6, v2.7, v2.9, and v3.0.
 Some features are only available on newer versions of `tmux` (currently v2.7+),
 but I hope to provide at least basic support for most `tmux` versions in active use.
-If you encounter any problems, please file an issue and I'll try to look into it.
+If you encounter any problems, please file an issue, and I'll try to look into it.
 
 [1]: https://i3wm.org/docs/refcard.html
 [6]: https://github.com/tmux/tmux/wiki/Getting-Started
@@ -33,7 +33,7 @@ Okay, so who is this plugin for anyway? You may be interested in this if:
   automatic tiling via `tmux` layouts, as opposed to splitting panes manually.
 - You use `i3wm`, but also do remote work over `ssh` + `tmux`. This lets
   you use similar keybindings in both contexts.
-- You also use other platforms like Gnome, Mac, or WSL. You want to take
+- You also use other platforms like Gnome, Mac or WSL. You want to take
   your `i3wm` muscle memory with you via `tmux`.
 - You're not really using `i3wm` anymore, but you did like how it handled
   terminals and workspaces. You'd like to keep working that way in terminals,
@@ -51,7 +51,7 @@ followed by <kbd>Shift</kbd> + <kbd>i</kbd> to install it (assuming default pref
 
 	set -g @plugin '2kabhishek/tmux-tilit'
 
-For `tmux` v2.7+, you can customize which layout is used as default for new workspaces.
+For `tmux` v2.7+, you can customize, which layout is used as default for new workspaces.
 To do so, add this to `~/.tmux.conf`:
 
 	set -g @tilit-default 'main-vertical'
@@ -110,6 +110,8 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
+| <kbd>Alt</kbd> + <kbd>-</kbd> | Horizontal Split |
+| <kbd>Alt</kbd> + <kbd>\</kbd> | Vertical Split |
 | <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd> | Switch to layout: only split |
 | <kbd>Alt</kbd> + <kbd>v</kbd> | Switch to layout: vsplit then split |
