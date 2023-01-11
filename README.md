@@ -20,7 +20,7 @@
 <a href="https://github.com/2KAbhishek/tmux-tilit/pulse">
 <img alt="Last Updated" src="https://img.shields.io/github/last-commit/2kabhishek/tmux-tilit?style=flat&color=e06c75&label="> </a>
 
-<h3>Short sweet headline with 🎇🎉</h3>
+<h3>Tile your terminal 🪟🪓</h3>
 
 <figure>
   <img src= "images/screenshot.png" alt="tmux-tilit Demo">
@@ -32,74 +32,52 @@
 
 ## What is this
 
-tmux-tilit is a `<utility/tool/feature>` that allows `<insert_target_audience>` to do `<action/task_it_does>`.
+tmux-tilit is a tmux plugin that adds tiling window manager like features and keybindings to tmux.
 
 ## Inspiration
 
-tmux-tilit was inspired by `<reason/idea>`.
+tmux-tilit was inspired by [tmux-tilish](https://github.com/jabirali/tmux-tilish).
+I wanted to make the keybindings match better with tmux's defaults, hence tilit was born!
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of `<coding_language/dependency/requirement_1>`
+- You have installed the latest version of `tmux` and `tpm`.
 
-## Getting tmux-tilit
+## Installing tmux-tilit
 
-To get tmux-tilit, follow these steps:
+To get tmux-tilit, add the following to your `~/.tmux.conf`:
 
 ```bash
-git clone https://github.com/2kabhishek/tmux-tilit
-cd tmux-tilit
-<install_command>
+set -g @plugin '2kabhishek/tmux-tilit'
 ```
 
 ## Using tmux-tilit
 
-```bash
-USAGE:
-    command [FLAGS] [OPTIONS]
-
-FLAGS:
-    -h, --help              Prints help information.
-
-OPTIONS:
-    -o, --option <value>    Option description.
-    Options are: a, b. [default: a]
-
-Example:
-
-
-```
+Please read [DOCS](./DOCS.md)
 
 ## How it was built
 
-tmux-tilit was built using `<tech/library>`
+tmux-tilit was built using `neovim`
 
 ## Challenges faced
 
-While building tmux-tilit the main challenges were `<issue/difficulty>`
+Making sure the keybindings work accross different cli programs was challenging.
 
 ## What I learned
 
-While building tmux-tilit I `<learned/accomplished>` about `<learning/accomplishment>`
+- Learned more about the tmux api.
 
 ## What's next
 
-Planning to add `<feature/module>`.
-
-### To-Do
-
-- [x] Setup repo
-- [ ] Think real hard
-- [ ] Start typing
-- [ ] Change me
-- [ ] Update README
-- [ ] Finish it
+You tell me!
 
 Hit the ⭐ button if you found this useful.
 
 ## More Info
+
+[tmux-tilish](https://github.com/jabirali/tmux-tilish)
 
 <div align="center">
 
