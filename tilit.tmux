@@ -183,6 +183,14 @@ else
         select-pane -t 'bottom-right' \\\; split-window \\\; run-shell 'tmux select-layout' \\\; send escape
 fi
 
+# Open horizontal split with Alt + -
+tmux $bind "${mod}-" \
+    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
+
+# Open horizontal split with Alt + \
+tmux $bind "${mod}\\" \
+    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
+
 # Name a window with Alt + n.
 tmux $bind "${mod}n" \
     command-prompt -p 'Workspace name:' 'rename-window "%%"'
