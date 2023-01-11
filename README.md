@@ -23,7 +23,7 @@
 <h3>Tile your terminal 🪟🪓</h3>
 
 <figure>
-  <img src= "images/screenshot.png" alt="tmux-tilit Demo">
+  <img src= "images/screenshot.jpg" alt="tmux-tilit Demo">
   <br/>
   <figcaption>tmux-tilit screenshot</figcaption>
 </figure>
