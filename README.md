@@ -55,7 +55,34 @@ set -g @plugin '2kabhishek/tmux-tilit'
 
 ## Using tmux-tilit
 
-Please read [DOCS](./DOCS.md)
+### Keybindings
+
+Finally, here is a list of the actual keybindings. Most are [taken from `i3wm`][1].
+Below, a "workspace" is what `tmux` would call a "window" and `vim` would call a "tab",
+while a "pane" is what `i3wm` would call a "window" and `vim` would call a "split".
+
+| Keybinding | Description |
+| ---------- | ----------- |
+| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Switch to workspace number 0-9 |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Move pane to workspace 0-9 |
+| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
+| <kbd>Alt</kbd> + <kbd>-</kbd> | Horizontal Split |
+| <kbd>Alt</kbd> + <kbd>\</kbd> | Vertical Split |
+| <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd> | Switch to layout: only split |
+| <kbd>Alt</kbd> + <kbd>v</kbd> | Switch to layout: vsplit then split |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd> | Switch to layout: only vsplit |
+| <kbd>Alt</kbd> + <kbd>t</kbd> | Switch to layout: fully tiled |
+| <kbd>Alt</kbd> + <kbd>z</kbd> | Switch to layout: zoom (fullscreen) |
+| <kbd>Alt</kbd> + <kbd>r</kbd> | Refresh current layout |
+| <kbd>Alt</kbd> + <kbd>n</kbd> | Name current workspace |
+| <kbd>Alt</kbd> + <kbd>x</kbd> | Quit (close) pane |
+| <kbd>Alt</kbd> + <kbd>d</kbd> | Exit (detach) `tmux` |
+| <kbd>Alt</kbd> + <kbd>r</kbd> | Reload config |
+
+For detailed instructions please read [DOCS](./DOCS.md)
 
 ## How it was built
 
