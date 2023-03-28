@@ -68,6 +68,7 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
+| <kbd>Shift</kbd> + <kbd>Left/Right Arrow</kbd> | Previous/Next Window |
 | <kbd>Alt</kbd> + <kbd>-</kbd> | Horizontal Split |
 | <kbd>Alt</kbd> + <kbd>\</kbd> | Vertical Split |
 | <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |

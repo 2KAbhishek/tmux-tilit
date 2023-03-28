@@ -270,4 +270,8 @@ if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
             display 'To enable this function, install `fzf` and restart `tmux`.'
     fi
 fi
+
+# Move between windows with Shift + Arrow keys
+bind -n S-Left  previous-window
+bind -n S-Right next-window
 # }}}
