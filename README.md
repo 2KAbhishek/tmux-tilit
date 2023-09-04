@@ -80,7 +80,7 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd> | Refresh current layout |
 | <kbd>Alt</kbd> + <kbd>n</kbd> | Name current workspace |
 | <kbd>Alt</kbd> + <kbd>x</kbd> | Quit (close) pane |
-| <kbd>Alt</kbd> + <kbd>d</kbd> | Exit (detach) `tmux` |
+| <kbd>Alt</kbd> + <kbd>d</kbd> | tmux dmenu launcher |
 | <kbd>Alt</kbd> + <kbd>r</kbd> | Reload config |
 
 For detailed instructions please read [DOCS](./DOCS.md)
