@@ -145,7 +145,7 @@ bind_layout "${mod}s" 'main-horizontal'
 bind_layout "${mod}S" 'even-vertical'
 bind_layout "${mod}v" 'main-vertical'
 bind_layout "${mod}V" 'even-horizontal'
-bind_layout "${mod}t" 'tiled'
+bind_layout "${mod}T" 'tiled'
 bind_layout "${mod}z" 'zoom'
 
 # Refresh the current layout (e.g. after deleting a pane).
@@ -212,8 +212,7 @@ else
 fi
 
 # Close a connection with Alt + d.
-tmux $bind "${mod}d \
-    confirm-before -p "Detach from #H:#S? (y/n)" detach-client
+tmux $bind "${mod}D" detach-client
 
 # Reload configuration with Alt + r.
 tmux $bind "${mod}r" \
