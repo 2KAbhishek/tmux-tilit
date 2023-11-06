@@ -89,6 +89,8 @@ For detailed instructions please read [DOCS](./DOCS.md)
 
 ## How it was built
 
+Major credits to [tmux-tilish](https://github.com/jabirali/tmux-tilish) for the inspiration
+
 tmux-tilit was built using `neovim`
 
 ## Challenges faced
@@ -97,7 +99,7 @@ Making sure the keybindings work accross different cli programs was challenging.
 
 ## What I learned
 
-- Learned more about the tmux api.
+-   Learned more about the tmux api.
 
 ## What's next
 
@@ -105,10 +107,17 @@ You tell me!
 
 Hit the ⭐ button if you found this useful.
 
-## More Info
+### 🧰 Tooling
 
-Major credits to [tmux-tilish](https://github.com/jabirali/tmux-tilish)
-Also checkout the nice powerline plugin you see on the screenshot, [tmux2k](https://github.com/2KAbhishek/tmux2k)
+-   [dots2k](https://github.com/2kabhishek/dots2k) — Dev Environment
+-   [nvim2k](https://github.com/2kabhishek/nvim2k) — Personalized Editor
+-   [sway2k](https://github.com/2kabhishek/sway2k) — Desktop Environment
+-   [qute2k](https://github.com/2kabhishek/qute2k) — Personalized Browser
+
+### 🔍 More Info
+
+-   [tmux-tea](https://github.com/2kabhishek/tmux-tea) — Simple and powerful tmux session manager
+-   [tmux2k](https://github.com/2kabhishek/tmux2k) — Makes your tmux statusbar pretty!
 
 <div align="center">
 

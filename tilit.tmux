@@ -265,9 +265,6 @@ if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
     fi
 fi
 
-# Run tmux-tea with Ctrl + t.
-tmux $bind "C-t" run-shell 't'
-
 # Move between windows with Shift + Arrow keys
 bind -n S-Left previous-window
 bind -n S-Right next-window
