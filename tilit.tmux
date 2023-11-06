@@ -6,7 +6,7 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2250
 
-# Check input parameters {{{
+# Check input parameters
 # Whether we need to use legacy workarounds (required before tmux 2.7).
 legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
 
@@ -51,9 +51,8 @@ else
     bind='bind -rT tilit'
     mod=''
 fi
-# }}}
 
-# Define core functionality {{{
+# Define core functionality
 bind_switch() {
     # Bind keys to switch between workspaces.
     tmux $bind "$1" \
@@ -98,9 +97,8 @@ char_at() {
     # a string in a way compatible with POSIX sh.
     echo $1 | cut -c $2
 }
-# }}}
 
-# Define keybindings {{{
+# Define keybindings
 # Define a prefix key.
 if [ -n "$prefix" ]; then
     tmux bind -n "$prefix" switch-client -T tilit
@@ -191,9 +189,6 @@ tmux $bind "${mod}-" \
 tmux $bind "${mod}\\" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
 
-# Run t with Ctrl + t.
-tmux $bind "C-t" run-shell 't'
-
 # Name a window with Alt + n.
 tmux $bind "${mod}n" \
     command-prompt -p 'Workspace name:' 'rename-window "%%"'
@@ -216,9 +211,8 @@ tmux $bind "${mod}D" detach-client
 # Reload configuration with Alt + r.
 tmux $bind "${mod}r" \
     source-file ~/.tmux.conf \\\; display "Config reloaded"
-# }}}
 
-# Define hooks {{{
+# Define hooks
 if [ -z "$legacy" ]; then
     # Autorefresh layout after deleting a pane.
     tmux set-hook -g after-split-window "select-layout; select-layout -E"
@@ -231,9 +225,8 @@ if [ -z "$legacy" ]; then
         tmux select-layout -E
     fi
 fi
-# }}}
 
-# Integrate with Vim for transparent navigation {{{
+# Integrate with Vim for transparent navigation
 if [ "${navigate:-}" = "on" ]; then
     # If `@tilit-navigate` is nonzero, integrate Alt + hjkl with `tmux-navigate`.
     tmux set -g '@navigate-left' '-n M-h'
@@ -257,9 +250,8 @@ elif [ "${navigator:-}" = "on" ]; then
         tmux bind -T copy-mode-vi "M-$l" select-pane -R
     fi
 fi
-# }}}
 
-# Integrate with `fzf` to approximate `dmenu` {{{
+# Integrate with `fzf` to approximate `dmenu`
 if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
     if [ -n "$(command -v fzf)" ]; then
         # The environment variables of your `default-shell` are used when running `fzf`.
@@ -273,7 +265,9 @@ if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
     fi
 fi
 
+# Run tmux-tea with Ctrl + t.
+tmux $bind "C-t" run-shell 't'
+
 # Move between windows with Shift + Arrow keys
-bind -n S-Left  previous-window
+bind -n S-Left previous-window
 bind -n S-Right next-window
-# }}}
