@@ -191,8 +191,7 @@ tmux $bind "${mod}-" \
 tmux $bind "${mod}\\" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
 
-# Run t with Alt + t / Ctrl + t.
-tmux $bind "${mod}t" run-shell 't'
+# Run t with Ctrl + t.
 tmux $bind "C-t" run-shell 't'
 
 # Name a window with Alt + n.

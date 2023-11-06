@@ -68,14 +68,12 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
 | <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
-| <kbd>Shift</kbd> + <kbd>Left/Right Arrow</kbd> | Previous/Next Window |
 | <kbd>Alt</kbd> + <kbd>-</kbd> | Horizontal Split |
-| <kbd>Alt</kbd> + <kbd>\</kbd> | Vertical Split |
+| <kbd>Alt</kbd> + <kbd>\\</kbd> | Vertical Split |
 | <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd> | Switch to layout: only split |
 | <kbd>Alt</kbd> + <kbd>v</kbd> | Switch to layout: vsplit then split |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd> | Switch to layout: only vsplit |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>t</kbd> | Launch [tmux-tea](https://github.com/2kabhishek/tmux-tea) |
 | <kbd>Alt</kbd> + <kbd>t</kbd> | Switch to layout: fully tiled |
 | <kbd>Alt</kbd> + <kbd>z</kbd> | Switch to layout: zoom (fullscreen) |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd> | Refresh current layout |
@@ -84,6 +82,8 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>d</kbd> | tmux dmenu launcher |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>d</kbd> | Detach |
 | <kbd>Alt</kbd> + <kbd>r</kbd> | Reload config |
+| <kbd>Control</kbd> + <kbd>t</kbd> | Launch [tmux-tea](https://github.com/2kabhishek/tmux-tea) |
+| <kbd>Shift</kbd> + <kbd>Left/Right Arrow</kbd> | Previous/Next Window |
 
 For detailed instructions please read [DOCS](./DOCS.md)
 
