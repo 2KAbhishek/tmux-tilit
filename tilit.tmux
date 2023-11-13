@@ -212,8 +212,8 @@ tmux $bind "${mod}D" detach-client
 tmux $bind "${mod}r" \
     source-file ~/.tmux.conf \\\; display "Config reloaded"
 
-# Toggle status bar with Alt + b.
-tmux $bind "${mod}b" set-option -g status
+# Toggle status bar with Alt + b, add - g for global
+tmux $bind "${mod}b" set-option status
 
 # Define hooks
 if [ -z "$legacy" ]; then
