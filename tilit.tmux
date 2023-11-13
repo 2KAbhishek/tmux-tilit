@@ -205,12 +205,15 @@ else
         kill-pane
 fi
 
-# Close a connection with Alt + d.
+# Close a connection with Alt + D.
 tmux $bind "${mod}D" detach-client
 
 # Reload configuration with Alt + r.
 tmux $bind "${mod}r" \
     source-file ~/.tmux.conf \\\; display "Config reloaded"
+
+# Toggle status bar with Alt + b.
+tmux $bind "${mod}b" set-option -g status
 
 # Define hooks
 if [ -z "$legacy" ]; then
