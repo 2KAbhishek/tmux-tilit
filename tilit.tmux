@@ -215,6 +215,22 @@ tmux $bind "${mod}r" \
 # Toggle status bar with Alt + b, add - g for global
 tmux $bind "${mod}b" set-option status
 
+# Open tmux-tea on Alt + s
+tmux $bind "${mod}s" run-shell "t"
+
+# Open extrakto search with Alt + f
+extrakto_open="$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
+tmux $bind "${mod}f" run-shell "\"$extrakto_open\" \"#{pane_id}\""
+
+# Open floating terminal with Alt + t
+tmux $bind "${mod}t" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
+
+# Open floating terminal with Alt + t
+tmux $bind "${mod}a" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -t"
+
+# Open floating lazygit with Alt + g
+tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
+
 # Define hooks
 if [ -z "$legacy" ]; then
     # Autorefresh layout after deleting a pane.
