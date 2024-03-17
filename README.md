@@ -23,7 +23,7 @@
 <h3>Better tiling for tmux 🪟🪓</h3>
 
 <figure>
-  <img src= "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3p6b2sqivrf1xajhbh27.jpg" alt="tmux-tilit Demo">
+  <img src= "images/screenshot.png" alt="tmux-tilit Demo">
   <br/>
   <figcaption>tmux-tilit screenshot</figcaption>
 </figure>
