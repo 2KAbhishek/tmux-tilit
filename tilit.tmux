@@ -208,6 +208,12 @@ fi
 # Close a connection with Alt + D.
 tmux $bind "${mod}D" detach-client
 
+# Show window list with Alt + w.
+tmux $bind "${mod}w" choose-window
+
+# Show session list with Alt + s.
+tmux $bind "${mod}s" choose-session
+
 # Reload configuration with Alt + r.
 tmux $bind "${mod}r" \
     source-file ~/.tmux.conf \\\; display "Config reloaded"
@@ -215,18 +221,18 @@ tmux $bind "${mod}r" \
 # Toggle status bar with Alt + b, add - g for global
 tmux $bind "${mod}b" set-option status
 
-# Open tmux-tea on Alt + s
-tmux $bind "${mod}s" run-shell "t"
+# Open tmux-tea on Alt + t
+tmux $bind "${mod}t" run-shell "t"
 
 # Open extrakto search with Alt + f
 extrakto_open="$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
 tmux $bind "${mod}f" run-shell "\"$extrakto_open\" \"#{pane_id}\""
 
-# Open floating terminal with Alt + t
-tmux $bind "${mod}t" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
+# Open floating terminal with Alt + o
+tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 
-# Open floating terminal with Alt + t
-tmux $bind "${mod}a" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -t"
+# Filter all notes with tdo on Alt + a
+tmux $bind "${mod}a" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -f"
 
 # Open floating lazygit with Alt + g
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"

@@ -80,15 +80,17 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd>       | Refresh current layout              |
 | <kbd>Alt</kbd> + <kbd>n</kbd>                          | Name current workspace              |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                          | Quit (close) pane                   |
+| <kbd>Alt</kbd> + <kbd>w</kbd>                          | Show all windows                    |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                          | Show all windows                    |
 | <kbd>Alt</kbd> + <kbd>d</kbd>                          | tmux dmenu launcher                 |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>d</kbd>       | Detach                              |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                          | Reload config                       |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                          | Toggle status bar                   |
-| <kbd>Alt</kbd> + <kbd>s</kbd>                          | Open session manager, tmux-tea      |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                          | Open session manager, tmux-tea      |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                          | Open pane text search, extrakto     |
-| <kbd>Alt</kbd> + <kbd>a</kbd>                          | Show all incompelte todos, tdo      |
+| <kbd>Alt</kbd> + <kbd>a</kbd>                          | Show all notes, powered by tdo      |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                          | Open lazygit                        |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                          | Open floating terminal              |
+| <kbd>Alt</kbd> + <kbd>o</kbd>                          | Open floating terminal              |
 
 For detailed instructions please read [DOCS](./DOCS.md)
 
