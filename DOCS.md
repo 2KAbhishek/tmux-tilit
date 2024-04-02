@@ -49,12 +49,12 @@ The easiest way to install this plugin is via the [Tmux Plugin Manager][2].
 Just add the following to `~/.tmux.conf`, then press <kbd>Ctrl</kbd> + <kbd>b</kbd>
 followed by <kbd>Shift</kbd> + <kbd>i</kbd> to install it (assuming default prefix key):
 
-	set -g @plugin '2kabhishek/tmux-tilit'
+    set -g @plugin '2kabhishek/tmux-tilit'
 
 For `tmux` v2.7+, you can customize, which layout is used as default for new workspaces.
 To do so, add this to `~/.tmux.conf`:
 
-	set -g @tilit-default 'main-vertical'
+    set -g @tilit-default 'main-vertical'
 
 Just replace `main-vertical` with one of the layouts from the `tmux` `man` page:
 
@@ -84,8 +84,8 @@ For further configuration options:
 
 It is also recommended that you add the following to the top of your `.tmux.conf`:
 
-	set -s escape-time 0
-	set -g base-index 1
+    set -s escape-time 0
+    set -g base-index 1
 
 The first line prevents e.g. <kbd>Esc</kbd> + <kbd>h</kbd> from triggering the
 <kbd>Alt</kbd> + <kbd>h</kbd> keybinding, preventing common misbehavior when
@@ -103,26 +103,26 @@ Finally, here is a list of the actual keybindings. Most are [taken from `i3wm`][
 Below, a "workspace" is what `tmux` would call a "window" and `vim` would call a "tab",
 while a "pane" is what `i3wm` would call a "window" and `vim` would call a "split".
 
-| Keybinding | Description |
-| ---------- | ----------- |
-| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Switch to workspace number 0-9 |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Move pane to workspace 0-9 |
-| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
-| <kbd>Alt</kbd> + <kbd>-</kbd> | Horizontal Split |
-| <kbd>Alt</kbd> + <kbd>\</kbd> | Vertical Split |
-| <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd> | Switch to layout: only split |
-| <kbd>Alt</kbd> + <kbd>v</kbd> | Switch to layout: vsplit then split |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd> | Switch to layout: only vsplit |
-| <kbd>Alt</kbd> + <kbd>t</kbd> | Switch to layout: fully tiled |
-| <kbd>Alt</kbd> + <kbd>z</kbd> | Switch to layout: zoom (fullscreen) |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd> | Refresh current layout |
-| <kbd>Alt</kbd> + <kbd>n</kbd> | Name current workspace |
-| <kbd>Alt</kbd> + <kbd>x</kbd> | Quit (close) pane |
-| <kbd>Alt</kbd> + <kbd>d</kbd> | Exit (detach) `tmux` |
-| <kbd>Alt</kbd> + <kbd>r</kbd> | Reload config |
+| Keybinding                                                                           | Description                                          |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                                           | Switch to workspace number 0-9                       |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                        | Move pane to workspace 0-9                           |
+| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>                    | Move focus left/down/up/right                        |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right                         |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd>                                                    | Create a new pane at "the end" of the current layout |
+| <kbd>Alt</kbd> + <kbd>-</kbd>                                                        | Horizontal Split                                     |
+| <kbd>Alt</kbd> + <kbd>\</kbd>                                                        | Vertical Split                                       |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                                                        | Switch to layout: split then vsplit                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd>                                     | Switch to layout: only split                         |
+| <kbd>Alt</kbd> + <kbd>v</kbd>                                                        | Switch to layout: vsplit then split                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd>                                     | Switch to layout: only vsplit                        |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                                                        | Switch to layout: fully tiled                        |
+| <kbd>Alt</kbd> + <kbd>z</kbd>                                                        | Switch to layout: zoom (fullscreen)                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd>                                     | Refresh current layout                               |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name current workspace                               |
+| <kbd>Alt</kbd> + <kbd>x</kbd>                                                        | Quit (close) pane                                    |
+| <kbd>Alt</kbd> + <kbd>d</kbd>                                                        | Exit (detach) `tmux`                                 |
+| <kbd>Alt</kbd> + <kbd>r</kbd>                                                        | Reload config                                        |
 
 The <kbd>Alt</kbd> + <kbd>0</kbd> and <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>
 bindings are "smart": depending on `base-index`, they either act on workspace 0 or 10.
@@ -133,7 +133,7 @@ However, you can configure `tilit` for international keyboards by providing a st
 <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>8</kbd><kbd>9</kbd><kbd>0</kbd>.
 For instance, for a UK keyboard, you would configure it as follows:
 
-	set -g @tilit-shiftnum '!"£$%^&*()'
+    set -g @tilit-shiftnum '!"£$%^&*()'
 
 Your terminal must support sending keycodes like `M-£` for the above to work.
 For instance, a UK keyboard layout works fine on `urxvt`, but does not work
@@ -146,16 +146,17 @@ there is also an "easy mode" available, which uses arrow keys instead of
 the `vim`-style <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> keys.
 This mode can be activated by putting this in your `.tmux.conf`:
 
-	set -g @tilit-easymode 'on'
+    set -g @tilit-easymode 'on'
 
 The revised keybindings for the pane focus and movement then become:
 
-| Keybinding | Description |
-| ---------- | ----------- |
-| <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move focus left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right |
+| Keybinding                                                                                                   | Description                   |
+| ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd>                    | Move focus left/down/up/right |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right  |
 
 ## Prefix mode
+
 Note that this feature is currently only available in `tmux` v2.4+.
 The "prefix mode" uses a prefix key instead of <kbd>Alt</kbd>, and
 may be particularly interesting for users of editors like `kak` and
@@ -163,7 +164,7 @@ may be particularly interesting for users of editors like `kak` and
 define a prefix keybinding in your `tmux.conf`. For instance, to use
 <kbd>Alt</kbd> + <kbd>Space</kbd> as your `tilit` prefix, add:
 
-	set -g @tilit-prefix 'M-space'
+    set -g @tilit-prefix 'M-space'
 
 Actions that would usually be done by <kbd>Alt</kbd> + <kbd>key</kbd>
 are now accomplished by pressing the prefix and then <kbd>key</kbd>.
@@ -182,7 +183,7 @@ The `tmux` option `repeat-time` can be used to customize this timeout.
 Personally, I find the default 500ms timeout somewhat short, and would
 recommend that you increase this to at least a second if you use `tilit`:
 
-	set -g repeat-time 1000
+    set -g repeat-time 1000
 
 ## Application launcher
 
@@ -192,7 +193,7 @@ If you have [`fzf`][5] available on your system, `tilit` can offer a similar
 application launcher using the same keyboard shortcut. To enable this
 functionality, add the following to your `~/.tmux.conf`:
 
-	set -g @tilit-dmenu 'on'
+    set -g @tilit-dmenu 'on'
 
 Basically, pressing <kbd>Alt</kbd>+<kbd>d</kbd> will then pop up a split
 that lets you fuzzy-search through all executables in your system `$PATH`.
@@ -208,20 +209,20 @@ This is currently only available in `tmux` v2.7+.
 Not all terminals support all keybindings. The plugin has been verified
 to work well with: `iTerm2` and `Terminal.app` on macOS; `alacritty`, `kitty`,
 `terminator`, `gnome-terminal`, and `urxvt` on Linux; `wsltty` and `alacritty`
-on Windows.  Some of these terminals bind <kbd>Alt</kbd>+<kbd>Enter</kbd> to
+on Windows. Some of these terminals bind <kbd>Alt</kbd>+<kbd>Enter</kbd> to
 fullscreen, so you have to disable that for the `tilit` "new pane" binding to
-work.  Moreover, `gnome-terminal` steals the "switch workspace" keybindings
-<kbd>Alt</kbd>+<kbd>0</kbd>-<kbd>9</kbd> *if* you open multiple tabs. If you
+work. Moreover, `gnome-terminal` steals the "switch workspace" keybindings
+<kbd>Alt</kbd>+<kbd>0</kbd>-<kbd>9</kbd> _if_ you open multiple tabs. If you
 use macOS, you likely want to configure the `Option` key to send either `Esc+`
 (`iTerm2`) or `Meta` (`Terminal.app`) under the keyboard settings of the app.
 
 If you use `xterm`, almost none of the <kbd>Alt</kbd> keys work by default.
 That can be fixed by adding this to `~/.Xresources`:
 
-	XTerm*eightBitControl: false
-	XTerm*eightBitInput: false
-	XTerm.omitTranslation: fullscreen
-	XTerm*fullscreen: never
+    XTerm*eightBitControl: false
+    XTerm*eightBitInput: false
+    XTerm.omitTranslation: fullscreen
+    XTerm*fullscreen: never
 
 ## Usage inside i3wm
 
@@ -231,7 +232,7 @@ instead of a new terminal pane inside `tmux`. The window manager always takes
 priority — so if both `i3wm` and `tilit` define the same keybinding,
 `i3wm` will intercept the keybinding before `tmux` sees it.
 
-The best way to solve this is perhaps to change your window manager  modifier key
+The best way to solve this is perhaps to change your window manager modifier key
 to <kbd>Super</kbd>, also known as the "Windows key". As described
 [in the `i3wm` user guide](https://i3wm.org/docs/userguide.html#_using_i3), this can
 be done by changing `$mod` to `Mod4` in your `i3wm` config. That way, pressing e.g.
@@ -247,32 +248,31 @@ of <kbd>Alt</kbd>, and is therefore compatible with the default `i3wm` keybindin
 There are two great plugins [tmux-navigate][10] and [vim-tmux-navigator][3],
 which both allow seamless navigation between `vim` splits and `tmux` splits.
 The former has an advantage that it also works over `ssh` connections, and that
-it plays better with zooming (<kbd>Alt</kbd>+<kbd>z</kbd>).  If you use either
+it plays better with zooming (<kbd>Alt</kbd>+<kbd>z</kbd>). If you use either
 plugin, you can tell `tilit` to make it setup the keybindings for you. (If you
 don't, `tilit` will use fallback keybindings that don't integrate with `vim`.)
 
 ### Navigate
 
-It is perhaps easiest to setup `tmux-navigate`. Just load `navigate` *after* `tilit`
+It is perhaps easiest to setup `tmux-navigate`. Just load `navigate` _after_ `tilit`
 in your `tmux.conf`, and set the option `@tilit-navigate` to `on` to integrate them.
 Thus a full working minimal example of a `tpm`-based `tmux.conf` would be:
 
-	# List of plugins.
-	set -g @plugin 'tmux-plugins/tpm'
-	set -g @plugin 'tmux-plugins/tmux-sensible'
-	set -g @plugin '2kabhishek/tmux-tilit'
-	set -g @plugin 'sunaku/tmux-navigate'
+    # List of plugins.
+    set -g @plugin 'tmux-plugins/tpm'
+    set -g @plugin 'tmux-plugins/tmux-sensible'
+    set -g @plugin '2kabhishek/tmux-tilit'
+    set -g @plugin 'sunaku/tmux-navigate'
 
-	# Plugin options.
-	set -g @tilit-navigate 'on'
+    # Plugin options.
+    set -g @tilit-navigate 'on'
 
-	# Install `tpm` if needed.
-	if "test ! -d ~/.tmux/plugins/tpm" \
-	   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+    # Install `tpm` if needed.
+    if "test ! -d ~/.tmux/plugins/tpm" \
+       "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-	# Activate the plugins.
-	run -b "~/.tmux/plugins/tpm/tpm"
-
+    # Activate the plugins.
+    run -b "~/.tmux/plugins/tpm/tpm"
 
 No further setup is required; `tilit` sets up the keybindings, and `navigate`
 handles seamless navigation of `vim`/`nvim` splits. However, if you also want
@@ -285,33 +285,33 @@ To install `vim-tmux-navigator`, you should first install the plugin for `vim`
 or `nvim`, as described on [their website][3]. Then place this in your
 `~/.config/nvim/init.vim` (`nvim`) or `~/.vimrc` (`vim`):
 
-	noremap <silent> <m-h> :TmuxNavigateLeft<cr>
-	noremap <silent> <m-j> :TmuxNavigateDown<cr>
-	noremap <silent> <m-k> :TmuxNavigateUp<cr>
-	noremap <silent> <m-l> :TmuxNavigateRight<cr>
+    noremap <silent> <m-h> :TmuxNavigateLeft<cr>
+    noremap <silent> <m-j> :TmuxNavigateDown<cr>
+    noremap <silent> <m-k> :TmuxNavigateUp<cr>
+    noremap <silent> <m-l> :TmuxNavigateRight<cr>
 
 You then just have to tell `tilit` that you want the integration:
 
-	set -g @tilit-navigator 'on'
+    set -g @tilit-navigator 'on'
 
-A minimal working  example of a `~/.tmux.conf` with `tpm` would then be:
+A minimal working example of a `~/.tmux.conf` with `tpm` would then be:
 
-	# List of plugins.
-	set -g @plugin 'tmux-plugins/tpm'
-	set -g @plugin 'tmux-plugins/tmux-sensible'
-	set -g @plugin '2kabhishek/tmux-tilit'
+    # List of plugins.
+    set -g @plugin 'tmux-plugins/tpm'
+    set -g @plugin 'tmux-plugins/tmux-sensible'
+    set -g @plugin '2kabhishek/tmux-tilit'
 
-	# Plugin options.
-	set -g @tilit-navigator 'on'
+    # Plugin options.
+    set -g @tilit-navigator 'on'
 
-	# Install `tpm` if needed.
-	if "test ! -d ~/.tmux/plugins/tpm" \
-	   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+    # Install `tpm` if needed.
+    if "test ! -d ~/.tmux/plugins/tpm" \
+       "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-	# Activate the plugins.
-	run -b "~/.tmux/plugins/tpm/tpm"
+    # Activate the plugins.
+    run -b "~/.tmux/plugins/tpm/tpm"
 
-[3]:  https://github.com/christoomey/vim-tmux-navigator
+[3]: https://github.com/christoomey/vim-tmux-navigator
 [10]: https://github.com/sunaku/tmux-navigate
 
 # Related projects
