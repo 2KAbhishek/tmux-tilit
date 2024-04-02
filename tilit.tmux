@@ -11,7 +11,7 @@
 legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
 
 # Read user options.
-for opt in default dmenu easymode navigate navigator prefix shiftnum; do
+for opt in default dmenu easymode navigator prefix shiftnum; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
 done
 
@@ -246,28 +246,30 @@ if [ -z "$legacy" ]; then
 fi
 
 # Integrate with Vim for transparent navigation
-if [ "${navigate:-}" = "on" ]; then
-    # If `@tilit-navigate` is nonzero, integrate Alt + hjkl with `tmux-navigate`.
-    tmux set -g '@navigate-left' '-n M-h'
-    tmux set -g '@navigate-down' '-n M-j'
-    tmux set -g '@navigate-up' '-n M-k'
-    tmux set -g '@navigate-right' '-n M-l'
-elif [ "${navigator:-}" = "on" ]; then
-    # If `@tilit-navigator` is nonzero, integrate Alt + hjkl with `vim-tmux-navigator`.
+if [ "${navigator:-}" = "on" ]; then
+    # If `@tilit-navigator` is nonzero, integrate Alt + hjkl with `vim-tmux-navigator`/'Navigator.nvim'.
     # This assumes that your Vim/Neovim is setup to use Alt + hjkl bindings as well.
-    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+    version_pat='s/^tmux[^0-9]*([.0-9]+).*/\1/p'
 
-    tmux $bind "${mod}${h}" if-shell "$is_vim" 'send M-h' 'select-pane -L'
-    tmux $bind "${mod}${j}" if-shell "$is_vim" 'send M-j' 'select-pane -D'
-    tmux $bind "${mod}${k}" if-shell "$is_vim" 'send M-k' 'select-pane -U'
-    tmux $bind "${mod}${l}" if-shell "$is_vim" 'send M-l' 'select-pane -R'
+    is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+    tmux bind-key -n M-h if-shell "$is_vim" "send-keys M-h" "select-pane -L"
+    tmux bind-key -n M-j if-shell "$is_vim" "send-keys M-j" "select-pane -D"
+    tmux bind-key -n M-k if-shell "$is_vim" "send-keys M-k" "select-pane -U"
+    tmux bind-key -n M-l if-shell "$is_vim" "send-keys M-l" "select-pane -R"
+    tmux_version="$(tmux -V | sed -En "$version_pat")"
+    tmux setenv -g tmux_version "$tmux_version"
 
-    if [ -z "$prefix" ]; then
-        tmux bind -T copy-mode-vi "M-$h" select-pane -L
-        tmux bind -T copy-mode-vi "M-$j" select-pane -D
-        tmux bind -T copy-mode-vi "M-$k" select-pane -U
-        tmux bind -T copy-mode-vi "M-$l" select-pane -R
-    fi
+    tmux if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'M-\\' if-shell \"$is_vim\" 'send-keys M-\\'  'select-pane -l'"
+    tmux if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'M-\\' if-shell \"$is_vim\" 'send-keys M-\\\\'  'select-pane -l'"
+
+    tmux bind-key -T copy-mode-vi M-h select-pane -L
+    tmux bind-key -T copy-mode-vi M-j select-pane -D
+    tmux bind-key -T copy-mode-vi M-k select-pane -U
+    tmux bind-key -T copy-mode-vi M-l select-pane -R
+    tmux bind-key -T copy-mode-vi M-, select-pane -l
 fi
 
 # Integrate with `fzf` to approximate `dmenu`
