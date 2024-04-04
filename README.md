@@ -32,12 +32,7 @@
 
 ## What is this
 
-tmux-tilit is a tmux plugin that adds tiling window manager like features and keybindings to tmux.
-
-## Inspiration
-
-tmux-tilit was inspired by [tmux-tilish](https://github.com/jabirali/tmux-tilish).
-I wanted to add some new commadns, make the keybindings match better with tmux's defaults, hence tilit was born!
+tmux-tilit brings tiling window manager features and smooth keybindings to your tmux sessions, boosting your productivity like never before!
 
 ## Prerequisites
 
@@ -57,50 +52,106 @@ set -g @plugin '2kabhishek/tmux-tilit'
 
 ### Keybindings
 
-Finally, here is a list of the actual keybindings. Most are [taken from `i3wm`][1].
-Below, a "workspace" is what `tmux` would call a "window" and `vim` would call a "tab",
-while a "pane" is what `i3wm` would call a "window" and `vim` would call a "split".
+| Keybinding                                         | Description                    |
+| -------------------------------------------------- | ------------------------------ |
+| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>         | Switch to workspace 0-9        |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0-9</kbd> | Move pane to workspace 0-9     |
+| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                | Move focus left/down/up/right  |
+| <kbd>Shift</kbd> + <kbd>&#8592;/&#8594;</kbd>      | Focus Previous/Next Window     |
+| <kbd>Alt</kbd> + <kbd>H/J/K/L</kbd>                | Move pane left/down/up/right   |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd>                  | Create a new pane              |
+| <kbd>Alt</kbd> + <kbd>-</kbd>                      | Horizontal Split               |
+| <kbd>Alt</kbd> + <kbd>\\</kbd>                     | Vertical Split                 |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                      | Layout: Split then vsplit      |
+| <kbd>Alt</kbd> + <kbd>S</kbd>                      | Layout: Split                  |
+| <kbd>Alt</kbd> + <kbd>v</kbd>                      | Layout: Vsplit then split      |
+| <kbd>Alt</kbd> + <kbd>V</kbd>                      | Layout: Vsplit                 |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                      | Layout: Tiled                  |
+| <kbd>Alt</kbd> + <kbd>z</kbd>                      | Layout: Zoom (fullscreen)      |
+| <kbd>Alt</kbd> + <kbd>R</kbd>                      | Refresh current layout         |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                      | Name current workspace         |
+| <kbd>Alt</kbd> + <kbd>x</kbd>                      | Quit (close) pane              |
+| <kbd>Alt</kbd> + <kbd>d</kbd>                      | tmux dmenu launcher            |
+| <kbd>Alt</kbd> + <kbd>D</kbd>                      | Detach                         |
+| <kbd>Alt</kbd> + <kbd>r</kbd>                      | Reload config                  |
+| <kbd>Alt</kbd> + <kbd>b</kbd>                      | Toggle status bar              |
+| <kbd>Alt</kbd> + <kbd>a</kbd>                      | Show all notes from [tdo][1]   |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                      | Session manager, [tmux-tea][2] |
+| <kbd>Alt</kbd> + <kbd>f</kbd>                      | Text search, [extrakto][3]     |
+| <kbd>Alt</kbd> + <kbd>g</kbd>                      | Open lazygit                   |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                      | Open floating terminal         |
 
-| Keybinding                                             | Description                         |
-| ------------------------------------------------------ | ----------------------------------- |
-| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>             | Switch to workspace number 0-9      |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0-9</kbd>     | Move pane to workspace 0-9          |
-| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                    | Move focus left/down/up/right       |
-| <kbd>Shift</kbd> + <kbd>Left/Right Arrow</kbd>         | Focus Previous/Next Window          |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h/j/k/l</kbd> | Move pane left/down/up/right        |
-| <kbd>Alt</kbd> + <kbd>Enter</kbd>                      | Create a new pane                   |
-| <kbd>Alt</kbd> + <kbd>-</kbd>                          | Horizontal Split                    |
-| <kbd>Alt</kbd> + <kbd>\\</kbd>                         | Vertical Split                      |
-| <kbd>Alt</kbd> + <kbd>s</kbd>                          | Switch to layout: split then vsplit |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd>       | Switch to layout: only split        |
-| <kbd>Alt</kbd> + <kbd>v</kbd>                          | Switch to layout: vsplit then split |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd>       | Switch to layout: only vsplit       |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                          | Switch to layout: fully tiled       |
-| <kbd>Alt</kbd> + <kbd>z</kbd>                          | Switch to layout: zoom (fullscreen) |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd>       | Refresh current layout              |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                          | Name current workspace              |
-| <kbd>Alt</kbd> + <kbd>x</kbd>                          | Quit (close) pane                   |
-| <kbd>Alt</kbd> + <kbd>d</kbd>                          | tmux dmenu launcher                 |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>d</kbd>       | Detach                              |
-| <kbd>Alt</kbd> + <kbd>r</kbd>                          | Reload config                       |
-| <kbd>Alt</kbd> + <kbd>b</kbd>                          | Toggle status bar                   |
-| <kbd>Alt</kbd> + <kbd>s</kbd>                          | Open session manager, tmux-tea      |
-| <kbd>Alt</kbd> + <kbd>f</kbd>                          | Open pane text search, extrakto     |
-| <kbd>Alt</kbd> + <kbd>a</kbd>                          | Show all incompelte todos, tdo      |
-| <kbd>Alt</kbd> + <kbd>g</kbd>                          | Open lazygit                        |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                          | Open floating terminal              |
+[1]: https://github.com/2KAbhishek/tdo
+[2]: https://github.com/2KAbhishek/tmux-tea
+[3]: https://github.com/laktak/extrakto
 
-For detailed instructions please read [DOCS](./DOCS.md)
+### Integrating with Neovim/Vim
 
-## How it was built
+To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5]
+
+Then, in your `~/.tmux.conf` add:
+
+```bash
+set -g @tilit-navigator 'on'
+```
+
+This will let you seamlessly navigate between vim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
+
+[4]: https://github.com/numToStr/Navigator.nvim
+[5]: https://github.com/christoomey/vim-tmux-navigator
+
+### Integrating with window managers
+
+If your window manager uses <kbd>Alt</kbd> as default modifier, it's recommended to switch to <kbd>Super</kbd> or <kbd>Meta</kbd> for a smoother experience.
+
+If you do not want to do that you can enable prefix mode and faster repeat-time in tmux:
+
+```bash
+set -g @tilit-prefix 'M-space'
+set -g repeat-time 1000
+```
+
+This will let you hit <kbd>Alt</kbd> + <kbd>Space</kbd> and then a key to perform an action, repeat time lets you run more actions with a single prefix.
+
+### Easy Mode
+
+To navigate using arrow keys, you can enable `easy-mode`
+
+    set -g @tilit-easymode 'on'
+
+The revised keybindings for the pane focus and movement then become:
+
+| Keybinding                                                                                                   | Description                   |
+| ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd>                    | Move focus left/down/up/right |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right  |
+
+### More Configs
+
+```bash
+# Default Workspace
+set -g @tilit-default 'main-vertical'
+
+# Sane defaults
+set -s escape-time 0
+set -g base-index 1
+set -g repeat-time 1000
+
+# Enable application launcher
+set -g @tilit-dmenu 'on'
+
+# Fix Shift + num keybinding for international keyboards
+set -g @tilit-shiftnum '!"£$%^&*()' # for UK layout
+```
+
+## How I built this
 
 Major credits to [tmux-tilish](https://github.com/jabirali/tmux-tilish) for the inspiration
-
-tmux-tilit was built using `neovim`
+I wanted to add some new commands and integrations, make the keybindings match better with tmux defaults.
 
 ## Challenges faced
 
-Making sure the keybindings work accross different cli programs was challenging.
+Making sure the keybindings work across different command line programs and environments was challenging.
 
 ## What I learned
 
