@@ -1,12 +1,8 @@
 #!/bin/sh
-# Project: tmux-tilit
-# Author:  Abhishek Keshri <iam2kabhishek@gmail.com>
-
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
 # shellcheck disable=SC2250
 
-# Check input parameters
 # Whether we need to use legacy workarounds (required before tmux 2.7).
 legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
 
@@ -52,15 +48,14 @@ else
     mod=''
 fi
 
-# Define core functionality
+# Bind keys to switch between workspaces.
 bind_switch() {
-    # Bind keys to switch between workspaces.
     tmux $bind "$1" \
         if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
 }
 
+# Bind keys to move panes between workspaces.
 bind_move() {
-    # Bind keys to move panes between workspaces.
     if [ -z "$legacy" ]; then
         tmux $bind "$1" \
             if-shell "tmux join-pane -t :$2" \
@@ -74,10 +69,10 @@ bind_move() {
     fi
 }
 
+# Bind keys to switch or refresh layouts.
 bind_layout() {
-    # Bind keys to switch or refresh layouts.
+    # Invoke the zoom feature.
     if [ "$2" = "zoom" ]; then
-        # Invoke the zoom feature.
         tmux $bind "$1" \
             resize-pane -Z
     else
@@ -93,12 +88,9 @@ bind_layout() {
 }
 
 char_at() {
-    # Finding the character at a given position in
-    # a string in a way compatible with POSIX sh.
     echo $1 | cut -c $2
 }
 
-# Define keybindings
 # Define a prefix key.
 if [ -n "$prefix" ]; then
     tmux bind -n "$prefix" switch-client -T tilit
@@ -126,8 +118,7 @@ bind_move "${mod}$(char_at $shiftnum 7)" 7
 bind_move "${mod}$(char_at $shiftnum 8)" 8
 bind_move "${mod}$(char_at $shiftnum 9)" 9
 
-# The mapping of Alt + 0 and Alt + Shift + 0 depends on `base-index`.
-# It can either refer to workspace number 0 or workspace number 10.
+# The mapping of Alt + 0 and Alt + Shift + 0 depends on `base-index`, either 0 or 10
 if [ "$(tmux show-option -gv base-index)" = "1" ]; then
     bind_switch "${mod}0" 10
     bind_move "${mod}$(char_at "$shiftnum" 10)" 10
@@ -136,9 +127,7 @@ else
     bind_move "${mod}$(char_at "$shiftnum" 10)" 0
 fi
 
-# Switch layout with Alt + <mnemonic key>. The mnemonics are `s` and `S` for
-# layouts Vim would generate with `:split`, and `v` and `V` for `:vsplit`.
-# The remaining mappings based on `z` and `t` should be quite obvious.
+# Switch layout with Alt + <mnemonic key>.
 bind_layout "${mod}s" 'main-horizontal'
 bind_layout "${mod}S" 'even-vertical'
 bind_layout "${mod}v" 'main-vertical'
@@ -171,6 +160,10 @@ else
     tmux $bind "${mod}${K}" run-shell 'old=`tmux display -p "#{pane_index}"`; tmux select-pane -U; tmux swap-pane -t $old'
     tmux $bind "${mod}${L}" run-shell 'old=`tmux display -p "#{pane_index}"`; tmux select-pane -R; tmux swap-pane -t $old'
 fi
+
+# Move between windows with Shift + Arrow keys
+tmux bind -n S-Left previous-window
+tmux bind -n S-Right next-window
 
 # Open a terminal with Alt + Enter.
 if [ -z "$legacy" ]; then
@@ -245,39 +238,35 @@ if [ -z "$legacy" ]; then
     fi
 fi
 
-# Integrate with Vim for transparent navigation
+# If `@tilit-navigator` is nonzero, integrate Ctrl + hjkl with `vim-tmux-navigator`/'Navigator.nvim'.
+# This assumes that your Vim/Neovim is setup to use Ctrl + hjkl bindings as well.
 if [ "${navigator:-}" = "on" ]; then
-    # If `@tilit-navigator` is nonzero, integrate Alt + hjkl with `vim-tmux-navigator`/'Navigator.nvim'.
-    # This assumes that your Vim/Neovim is setup to use Alt + hjkl bindings as well.
     version_pat='s/^tmux[^0-9]*([.0-9]+).*/\1/p'
 
     is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-    tmux bind-key -n M-h if-shell "$is_vim" "send-keys M-h" "select-pane -L"
-    tmux bind-key -n M-j if-shell "$is_vim" "send-keys M-j" "select-pane -D"
-    tmux bind-key -n M-k if-shell "$is_vim" "send-keys M-k" "select-pane -U"
-    tmux bind-key -n M-l if-shell "$is_vim" "send-keys M-l" "select-pane -R"
+    tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+    tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+    tmux bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+    tmux bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
     tmux_version="$(tmux -V | sed -En "$version_pat")"
     tmux setenv -g tmux_version "$tmux_version"
 
     tmux if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'M-\\' if-shell \"$is_vim\" 'send-keys M-\\'  'select-pane -l'"
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
     tmux if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'M-\\' if-shell \"$is_vim\" 'send-keys M-\\\\'  'select-pane -l'"
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
 
-    tmux bind-key -T copy-mode-vi M-h select-pane -L
-    tmux bind-key -T copy-mode-vi M-j select-pane -D
-    tmux bind-key -T copy-mode-vi M-k select-pane -U
-    tmux bind-key -T copy-mode-vi M-l select-pane -R
-    tmux bind-key -T copy-mode-vi M-, select-pane -l
+    tmux bind-key -T copy-mode-vi C-h select-pane -L
+    tmux bind-key -T copy-mode-vi C-j select-pane -D
+    tmux bind-key -T copy-mode-vi C-k select-pane -U
+    tmux bind-key -T copy-mode-vi C-l select-pane -R
+    tmux bind-key -T copy-mode-vi C-\\ select-pane -l
 fi
 
 # Integrate with `fzf` to approximate `dmenu`
 if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
     if [ -n "$(command -v fzf)" ]; then
-        # The environment variables of your `default-shell` are used when running `fzf`.
-        # This solution is about an order of magnitude faster than invoking `compgen`.
-        # Based on: https://medium.com/njiuko/using-fzf-instead-of-dmenu-2780d184753f
         tmux $bind "${mod}d" \
             select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
     else
@@ -285,7 +274,3 @@ if [ -z "$legacy" ] && [ "${dmenu:-}" = "on" ]; then
             display 'To enable this function, install `fzf` and restart `tmux`.'
     fi
 fi
-
-# Move between windows with Shift + Arrow keys
-bind -n S-Left previous-window
-bind -n S-Right next-window
