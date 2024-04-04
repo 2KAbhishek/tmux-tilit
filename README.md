@@ -80,6 +80,8 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>f</kbd>                      | Text search, [extrakto][3]     |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                      | Open lazygit                   |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                      | Open floating terminal         |
+| <kbd>Alt</kbd> + <kbd>w</kbd>                          | Show all windows                    |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                          | Show all windows                    |
 
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/2KAbhishek/tmux-tea
