@@ -127,11 +127,11 @@ else
     bind_move "${mod}$(char_at "$shiftnum" 10)" 0
 fi
 
-# Switch layout with Alt + <mnemonic key>.
-bind_layout "${mod}s" 'main-horizontal'
-bind_layout "${mod}S" 'even-vertical'
-bind_layout "${mod}v" 'main-vertical'
-bind_layout "${mod}V" 'even-horizontal'
+# Switch layout
+bind_layout "${mod}e" 'even-vertical'
+bind_layout "${mod}E" 'even-horizontal'
+bind_layout "${mod}m" 'main-vertical'
+bind_layout "${mod}M" 'main-horizontal'
 bind_layout "${mod}T" 'tiled'
 bind_layout "${mod}z" 'zoom'
 
