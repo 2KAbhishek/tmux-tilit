@@ -161,9 +161,11 @@ else
     tmux $bind "${mod}${L}" run-shell 'old=`tmux display -p "#{pane_index}"`; tmux select-pane -R; tmux swap-pane -t $old'
 fi
 
-# Move between windows with Shift + Arrow keys
+# Move between windows with Shift + Arrow and Alt + [/] keys
 tmux bind -n S-Left previous-window
 tmux bind -n S-Right next-window
+tmux $bind "${mod}[" previous-window
+tmux $bind "${mod}]" next-window
 
 # Open a terminal with Alt + Enter.
 if [ -z "$legacy" ]; then
