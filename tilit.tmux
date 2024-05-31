@@ -221,7 +221,7 @@ tmux $bind "${mod}t" run-shell "t"
 
 # Open extrakto search with Alt + f
 extrakto_open="$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
-tmux $bind "${mod}f" run-shell "\"$extrakto_open\" \"#{pane_id}\""
+tmux $bind "${mod}f" run-shell "$extrakto_open"
 
 # Open floating terminal with Alt + o
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
