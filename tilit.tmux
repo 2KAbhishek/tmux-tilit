@@ -217,7 +217,7 @@ tmux $bind "${mod}r" \
 tmux $bind "${mod}b" set-option status
 
 # Open tmux-tea on Alt + t
-tmux $bind "${mod}t" run-shell "t"
+tmux $bind "${mod}t" run-shell "tea"
 
 # Open extrakto search with Alt + f
 extrakto_open="$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
