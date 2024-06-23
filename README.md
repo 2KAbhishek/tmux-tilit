@@ -59,8 +59,8 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>           | Move focus to pane        |
 | <kbd>Alt</kbd> + <kbd>H/J/K/L</kbd>           | Move pane in window       |
 | <kbd>Alt</kbd> + <kbd>Enter</kbd>             | Create a new pane         |
-| <kbd>Alt</kbd> + <kbd>-</kbd>                 | Horizontal Split          |
-| <kbd>Alt</kbd> + <kbd>\\</kbd>                | Vertical Split            |
+| <kbd>Alt</kbd> + <kbd>-/,</kbd>               | Horizontal Split          |
+| <kbd>Alt</kbd> + <kbd>\\//</kbd>              | Vertical Split            |
 | <kbd>Alt</kbd> + <kbd>a</kbd>                 | Show all notes, [tdo][1]  |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                 | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>d</kbd>                 | tmux dmenu launcher       |
@@ -83,7 +83,6 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>z</kbd>                 | Layout: Zoom              |
 | <kbd>Alt</kbd> + <kbd>[/]</kbd>               | Focus prev/next window    |
 | <kbd>Shift</kbd> + <kbd>&#8592;/&#8594;</kbd> | Focus prev/next window    |
-
 
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/2KAbhishek/tmux-tea
