@@ -166,6 +166,8 @@ tmux bind -n S-Left previous-window
 tmux bind -n S-Right next-window
 tmux $bind "${mod}[" previous-window
 tmux $bind "${mod}]" next-window
+tmux $bind "${mod}\`" last-window
+tmux $bind "${mod}a" last-pane
 
 # Open a terminal with Alt + Enter.
 if [ -z "$legacy" ]; then
@@ -189,7 +191,7 @@ tmux $bind "${mod}/" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
 
 # Name a window with Alt + n.
-tmux $bind "${mod}n" \
+tmux $bind "${mod}," \
     command-prompt -p 'Workspace name:' 'rename-window "%%"'
 
 # Close a window with Alt + x
@@ -230,8 +232,8 @@ tmux $bind "${mod}f" run-shell "$extrakto_open"
 # Open floating terminal with Alt + o
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 
-# Filter all notes with tdo on Alt + a
-tmux $bind "${mod}a" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -f"
+# Filter all notes with tdo on Alt + n
+tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -f"
 
 # Open floating lazygit with Alt + g
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"

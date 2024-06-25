@@ -61,13 +61,15 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Enter</kbd>             | Create a new pane         |
 | <kbd>Alt</kbd> + <kbd>-/,</kbd>               | Horizontal Split          |
 | <kbd>Alt</kbd> + <kbd>\\//</kbd>              | Vertical Split            |
-| <kbd>Alt</kbd> + <kbd>a</kbd>                 | Show all notes, [tdo][1]  |
+| <kbd>Alt</kbd> + <kbd>,</kbd>                 | Rename current window     |
+| <kbd>Alt</kbd> + <kbd>`</kbd>                 | Last active window        |
+| <kbd>Alt</kbd> + <kbd>a</kbd>                 | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                 | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>d</kbd>                 | tmux dmenu launcher       |
 | <kbd>Alt</kbd> + <kbd>D</kbd>                 | Detach                    |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                 | Text grab, [extrakto][3]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                 | Open lazygit              |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                 | Name current workspace    |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                 | Show all notes, [tdo][1]  |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                 | Open floating terminal    |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                 | Reload config             |
 | <kbd>Alt</kbd> + <kbd>R</kbd>                 | Refresh current layout    |
