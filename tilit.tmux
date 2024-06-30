@@ -20,47 +20,39 @@ fi
 # Determine "arrow types".
 if [ "${easymode:-}" = "on" ]; then
     # Simplified arrows.
-    h='left'
-    j='down'
-    k='up'
-    l='right'
-    H='S-left'
-    J='S-down'
-    K='S-up'
-    L='S-right'
+    h='left' j='down' k='up' l='right'
+    H='S-left' J='S-down' K='S-up' L='S-right'
 else
     # Vim-style arrows.
-    h='h'
-    j='j'
-    k='k'
-    l='l'
-    H='H'
-    J='J'
-    K='K'
-    L='L'
+    h='h' j='j' k='k' l='l'
+    H='H' J='J' K='K' L='L'
 fi
 
 # Determine modifier vs. prefix key.
 if [ -z "${prefix:-}" ]; then
-    bind='bind -n'
-    mod='M-'
+    bind='bind -n' mod='M-'
 else
-    bind='bind -rT tilit'
-    mod=''
+    bind='bind -rT tilit' mod=''
 fi
+
+# Define a prefix key.
+if [ -n "$prefix" ]; then
+    tmux bind -n "$prefix" switch-client -T tilit
+fi
+
+char_at() {
+    echo $1 | cut -c $2
+}
 
 # Bind keys to switch between workspaces.
 bind_switch() {
-    tmux $bind "$1" \
-        if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
+    tmux $bind "$1" if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
 }
 
 # Bind keys to move panes between workspaces.
 bind_move() {
     if [ -z "$legacy" ]; then
-        tmux $bind "$1" \
-            if-shell "tmux join-pane -t :$2" \
-            "" \
+        tmux $bind "$1" if-shell "tmux join-pane -t :$2" "" \
             "new-window -dt :$2; join-pane -t :$2; select-pane -t top-left; kill-pane" \\\; select-layout \\\; select-layout -E
     else
         tmux $bind "$1" \
@@ -73,24 +65,22 @@ bind_move() {
 # Bind keys to switch layouts
 bind_layout() {
     if [ -z "$legacy" ]; then
-        tmux $bind "$1" \
-            select-layout "$2" \\\; select-layout -E
+        tmux $bind "$1" select-layout "$2" \\\; select-layout -E
     else
-        tmux $bind "$1" \
-            run-shell "tmux select-layout \"$2\"" \\\; send escape
+        tmux $bind "$1" run-shell "tmux select-layout \"$2\"" \\\; send escape
     fi
 }
 
-char_at() {
-    echo $1 | cut -c $2
-}
-
-# Define a prefix key.
-if [ -n "$prefix" ]; then
-    tmux bind -n "$prefix" switch-client -T tilit
+# Base index aware mapping
+if [ "$(tmux show-option -gv base-index)" = "1" ]; then
+    bind_switch "${mod}0" 10
+    bind_move "${mod}$(char_at "$shiftnum" 10)" 10
+else
+    bind_switch "${mod}0" 0
+    bind_move "${mod}$(char_at "$shiftnum" 10)" 0
 fi
 
-# Switch to workspace via Alt + #.
+# Switch to workspace
 bind_switch "${mod}1" 1
 bind_switch "${mod}2" 2
 bind_switch "${mod}3" 3
@@ -101,7 +91,7 @@ bind_switch "${mod}7" 7
 bind_switch "${mod}8" 8
 bind_switch "${mod}9" 9
 
-# Move pane to workspace via Alt + Shift + #.
+# Move pane to workspace
 bind_move "${mod}$(char_at $shiftnum 1)" 1
 bind_move "${mod}$(char_at $shiftnum 2)" 2
 bind_move "${mod}$(char_at $shiftnum 3)" 3
@@ -112,15 +102,6 @@ bind_move "${mod}$(char_at $shiftnum 7)" 7
 bind_move "${mod}$(char_at $shiftnum 8)" 8
 bind_move "${mod}$(char_at $shiftnum 9)" 9
 
-# The mapping of Alt + 0 and Alt + Shift + 0 depends on `base-index`, either 0 or 10
-if [ "$(tmux show-option -gv base-index)" = "1" ]; then
-    bind_switch "${mod}0" 10
-    bind_move "${mod}$(char_at "$shiftnum" 10)" 10
-else
-    bind_switch "${mod}0" 0
-    bind_move "${mod}$(char_at "$shiftnum" 10)" 0
-fi
-
 # Switch layout
 bind_layout "${mod}e" 'even-vertical'
 bind_layout "${mod}E" 'even-horizontal'
@@ -128,13 +109,17 @@ bind_layout "${mod}m" 'main-vertical'
 bind_layout "${mod}M" 'main-horizontal'
 bind_layout "${mod}T" 'tiled'
 
-# Switch to pane via Alt + hjkl.
+# Focus on pane
 tmux $bind "${mod}${h}" select-pane -L
 tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${l}" select-pane -R
 
-# Move a pane via Alt + Shift + hjkl.
+# Alternate move between panes
+tmux bind -n S-Left previous-window
+tmux bind -n S-Right next-window
+
+# Move panes in window
 if [ -z "$legacy" ]; then
     tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
     tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
@@ -147,15 +132,41 @@ else
     tmux $bind "${mod}${L}" run-shell 'old=`tmux display -p "#{pane_index}"`; tmux select-pane -R; tmux swap-pane -t $old'
 fi
 
-# Move between windows with Shift + Arrow and Alt + [/] keys
-tmux bind -n S-Left previous-window
-tmux bind -n S-Right next-window
+tmux $bind "${mod}," command-prompt -p 'Workspace name:' 'rename-window "%%"'
 tmux $bind "${mod}[" previous-window
 tmux $bind "${mod}]" next-window
 tmux $bind "${mod}\`" last-window
+tmux $bind "${mod}C" customize-mode
+tmux $bind "${mod}D" detach-client
+tmux $bind "${mod}R" rotate-window
+tmux $bind "${mod}X" kill-window
+tmux $bind "${mod}a" command-prompt
+tmux $bind "${mod}b" set-option status
+tmux $bind "${mod}f" run-shell "$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
 tmux $bind "${mod}p" last-pane
+tmux $bind "${mod}q" kill-session
+tmux $bind "${mod}r" source-file $config_path\\\; display "Config reloaded"
+tmux $bind "${mod}s" choose-tree
+tmux $bind "${mod}t" run-shell "tea"
+tmux $bind "${mod}w" break-pane
+tmux $bind "${mod}x" kill-pane
+tmux $bind "${mod}z" resize-pane -Z
 
-# Open a terminal with Alt + Enter.
+tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
+tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
+tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -E "$EDITOR $TMUX_PLUGIN_MANAGER_PATH/tmux-tilit/README.md"
+tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
+tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
+
+# Splits
+tmux $bind "${mod}-" \
+    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
+tmux $bind "${mod}\\" \
+    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
+tmux $bind "${mod}/" \
+    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
+
+# New pane
 if [ -z "$legacy" ]; then
     tmux $bind "${mod}enter" \
         run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -c "$cwd"'
@@ -163,61 +174,6 @@ else
     tmux $bind "${mod}enter" \
         select-pane -t 'bottom-right' \\\; split-window \\\; run-shell 'tmux select-layout' \\\; send escape
 fi
-
-# Open horizontal split with Alt + -
-tmux $bind "${mod}-" \
-    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
-
-# Open horizontal split with Alt + \ or /
-tmux $bind "${mod}\\" \
-    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
-tmux $bind "${mod}/" \
-    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
-
-# Name a window with Alt + n.
-tmux $bind "${mod}," \
-    command-prompt -p 'Workspace name:' 'rename-window "%%"'
-
-# Close a window with Alt + x
-if [ -z "$legacy" ]; then
-    tmux $bind "${mod}x" \
-        if-shell \
-        '[ "$(tmux display-message -p "#{window_panes}")" -gt 1 ]' \
-        'kill-pane; select-layout; select-layout -E' \
-        'kill-pane'
-else
-    tmux $bind "${mod}x" kill-pane
-fi
-
-tmux $bind "${mod}C" customize-mode
-tmux $bind "${mod}R" rotate-window
-tmux $bind "${mod}a" command-prompt
-tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR $config_path"
-tmux $bind "${mod}f" run-shell "$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
-tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR $TMUX_PLUGIN_MANAGER_PATH/tmux-tilit/README.md"
-tmux $bind "${mod}q" kill-session
-tmux $bind "${mod}r" source-file $config_path\\\; display "Config reloaded"
-tmux $bind "${mod}s" choose-tree
-tmux $bind "${mod}w" break-pane
-tmux $bind "${mod}z" resize-pane -Z
-
-# Close a connection with Alt + D.
-tmux $bind "${mod}D" detach-client
-
-# Toggle status bar with Alt + b, add - g for global
-tmux $bind "${mod}b" set-option status
-
-# Open tmux-tea on Alt + t
-tmux $bind "${mod}t" run-shell "tea"
-
-# Open floating terminal with Alt + o
-tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
-
-# Filter all notes with tdo on Alt + n
-tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "tdo -f"
-
-# Open floating lazygit with Alt + g
-tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 
 # Define hooks
 if [ -z "$legacy" ]; then
