@@ -38,7 +38,7 @@ tmux-tilit brings tiling window manager features and smooth keybindings to your 
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of `tmux (>= 2.7)` and [`tpm`](https://github.com/tmux-plugins/tpm).
+- You have installed the latest version of `tmux (>= 3.0)` and [`tpm`](https://github.com/tmux-plugins/tpm).
 
 ## Installing tmux-tilit
 
