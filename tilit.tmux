@@ -5,6 +5,7 @@
 
 # Whether we need to use legacy workarounds (required before tmux 2.7).
 legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
+config_path="$HOME/.config/tmux/tmux.conf"
 
 # Read user options.
 for opt in default dmenu easymode navigator prefix shiftnum; do
@@ -69,21 +70,14 @@ bind_move() {
     fi
 }
 
-# Bind keys to switch or refresh layouts.
+# Bind keys to switch layouts
 bind_layout() {
-    # Invoke the zoom feature.
-    if [ "$2" = "zoom" ]; then
+    if [ -z "$legacy" ]; then
         tmux $bind "$1" \
-            resize-pane -Z
+            select-layout "$2" \\\; select-layout -E
     else
-        # Actually switch layout.
-        if [ -z "$legacy" ]; then
-            tmux $bind "$1" \
-                select-layout "$2" \\\; select-layout -E
-        else
-            tmux $bind "$1" \
-                run-shell "tmux select-layout \"$2\"" \\\; send escape
-        fi
+        tmux $bind "$1" \
+            run-shell "tmux select-layout \"$2\"" \\\; send escape
     fi
 }
 
@@ -133,14 +127,6 @@ bind_layout "${mod}E" 'even-horizontal'
 bind_layout "${mod}m" 'main-vertical'
 bind_layout "${mod}M" 'main-horizontal'
 bind_layout "${mod}T" 'tiled'
-bind_layout "${mod}z" 'zoom'
-
-# Refresh the current layout (e.g. after deleting a pane).
-if [ -z "$legacy" ]; then
-    tmux $bind "${mod}R" select-layout -E
-else
-    tmux $bind "${mod}R" run-shell 'tmux select-layout'\\\; send escape
-fi
 
 # Switch to pane via Alt + hjkl.
 tmux $bind "${mod}${h}" select-pane -L
@@ -167,7 +153,7 @@ tmux bind -n S-Right next-window
 tmux $bind "${mod}[" previous-window
 tmux $bind "${mod}]" next-window
 tmux $bind "${mod}\`" last-window
-tmux $bind "${mod}a" last-pane
+tmux $bind "${mod}p" last-pane
 
 # Open a terminal with Alt + Enter.
 if [ -z "$legacy" ]; then
@@ -200,32 +186,29 @@ if [ -z "$legacy" ]; then
         'kill-pane; select-layout; select-layout -E' \
         'kill-pane'
 else
-    tmux $bind "${mod}q" \
-        kill-pane
+    tmux $bind "${mod}x" kill-pane
 fi
+
+tmux $bind "${mod}C" customize-mode
+tmux $bind "${mod}R" rotate-window
+tmux $bind "${mod}a" command-prompt
+tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR $config_path"
+tmux $bind "${mod}f" run-shell "$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
+tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR $TMUX_PLUGIN_MANAGER_PATH/tmux-tilit/README.md"
+tmux $bind "${mod}q" kill-session
+tmux $bind "${mod}r" source-file $config_path\\\; display "Config reloaded"
+tmux $bind "${mod}s" choose-tree
+tmux $bind "${mod}w" break-pane
+tmux $bind "${mod}z" resize-pane -Z
 
 # Close a connection with Alt + D.
 tmux $bind "${mod}D" detach-client
-
-# Show window list with Alt + w.
-tmux $bind "${mod}w" choose-window
-
-# Show session list with Alt + s.
-tmux $bind "${mod}s" choose-session
-
-# Reload configuration with Alt + r.
-tmux $bind "${mod}r" \
-    source-file ~/.tmux.conf \\\; display "Config reloaded"
 
 # Toggle status bar with Alt + b, add - g for global
 tmux $bind "${mod}b" set-option status
 
 # Open tmux-tea on Alt + t
 tmux $bind "${mod}t" run-shell "tea"
-
-# Open extrakto search with Alt + f
-extrakto_open="$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
-tmux $bind "${mod}f" run-shell "$extrakto_open"
 
 # Open floating terminal with Alt + o
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
