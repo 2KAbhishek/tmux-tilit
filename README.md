@@ -54,36 +54,36 @@ set -g @plugin '2kabhishek/tmux-tilit'
 
 | Keybinding                                    | Description               |
 | --------------------------------------------- | ------------------------- |
-| <kbd>Alt</kbd> + <kbd>0-9</kbd>               | Switch to window 0-9      |
-| <kbd>Alt+Shift</kbd> + <kbd>0-9</kbd>         | Move pane to window 0-9   |
-| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>           | Move focus to pane        |
-| <kbd>Alt</kbd> + <kbd>H/J/K/L</kbd>           | Move pane in window       |
-| <kbd>Alt</kbd> + <kbd>Enter</kbd>             | Create a new pane         |
-| <kbd>Alt</kbd> + <kbd>-</kbd>                 | Horizontal Split          |
-| <kbd>Alt</kbd> + <kbd>\\//</kbd>              | Vertical Split            |
 | <kbd>Alt</kbd> + <kbd>,</kbd>                 | Rename current window     |
+| <kbd>Alt</kbd> + <kbd>-</kbd>                 | Horizontal Split          |
+| <kbd>Alt</kbd> + <kbd>0-9</kbd>               | Switch to window 0-9      |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd>             | Create a new pane         |
+| <kbd>Alt</kbd> + <kbd>Shift + 0-9</kbd>       | Move pane to window 0-9   |
+| <kbd>Alt</kbd> + <kbd>Shift + D</kbd>         | Detach                    |
+| <kbd>Alt</kbd> + <kbd>Shift + E</kbd>         | Layout: Even Horizontal   |
+| <kbd>Alt</kbd> + <kbd>Shift + H/J/K/L</kbd>   | Move pane in window       |
+| <kbd>Alt</kbd> + <kbd>Shift + M</kbd>         | Layout: Main Horizontal   |
+| <kbd>Alt</kbd> + <kbd>Shift + R</kbd>         | Refresh current layout    |
+| <kbd>Alt</kbd> + <kbd>Shift + T</kbd>         | Layout: Tiled             |
+| <kbd>Alt</kbd> + <kbd>\ or /</kbd>            | Vertical Split            |
+| <kbd>Alt</kbd> + <kbd>[ or ]</kbd>            | Focus prev/next window    |
 | <kbd>Alt</kbd> + <kbd>`</kbd>                 | Last active window        |
-| <kbd>Alt</kbd> + <kbd>a</kbd>                 | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                 | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>d</kbd>                 | tmux dmenu launcher       |
-| <kbd>Alt</kbd> + <kbd>D</kbd>                 | Detach                    |
+| <kbd>Alt</kbd> + <kbd>e</kbd>                 | Layout: Even Vertical     |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                 | Text grab, [extrakto][3]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                 | Open lazygit              |
+| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>           | Move focus to pane        |
+| <kbd>Alt</kbd> + <kbd>m</kbd>                 | Layout: Main Vertical     |
 | <kbd>Alt</kbd> + <kbd>n</kbd>                 | Show all notes, [tdo][1]  |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                 | Open floating terminal    |
+| <kbd>Alt</kbd> + <kbd>p</kbd>                 | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                 | Reload config             |
-| <kbd>Alt</kbd> + <kbd>R</kbd>                 | Refresh current layout    |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                 | Show all sessions         |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                 | Session manager, [tea][2] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                 | Show all windows          |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                 | Close pane                |
-| <kbd>Alt</kbd> + <kbd>e</kbd>                 | Layout: Even Vertical     |
-| <kbd>Alt</kbd> + <kbd>E</kbd>                 | Layout: Even Horizontal   |
-| <kbd>Alt</kbd> + <kbd>m</kbd>                 | Layout: Main Vertical     |
-| <kbd>Alt</kbd> + <kbd>M</kbd>                 | Layout: Main Horizontal   |
-| <kbd>Alt</kbd> + <kbd>T</kbd>                 | Layout: Tiled             |
 | <kbd>Alt</kbd> + <kbd>z</kbd>                 | Layout: Zoom              |
-| <kbd>Alt</kbd> + <kbd>[/]</kbd>               | Focus prev/next window    |
 | <kbd>Shift</kbd> + <kbd>&#8592;/&#8594;</kbd> | Focus prev/next window    |
 
 [1]: https://github.com/2KAbhishek/tdo
