@@ -181,10 +181,8 @@ fi
 # Open horizontal split with Alt + -
 tmux $bind "${mod}-" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
-tmux $bind "${mod}," \
-    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
 
-# Open horizontal split with Alt + \
+# Open horizontal split with Alt + \ or /
 tmux $bind "${mod}\\" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
 tmux $bind "${mod}/" \

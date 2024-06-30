@@ -59,7 +59,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>           | Move focus to pane        |
 | <kbd>Alt</kbd> + <kbd>H/J/K/L</kbd>           | Move pane in window       |
 | <kbd>Alt</kbd> + <kbd>Enter</kbd>             | Create a new pane         |
-| <kbd>Alt</kbd> + <kbd>-/,</kbd>               | Horizontal Split          |
+| <kbd>Alt</kbd> + <kbd>-</kbd>                 | Horizontal Split          |
 | <kbd>Alt</kbd> + <kbd>\\//</kbd>              | Vertical Split            |
 | <kbd>Alt</kbd> + <kbd>,</kbd>                 | Rename current window     |
 | <kbd>Alt</kbd> + <kbd>`</kbd>                 | Last active window        |
