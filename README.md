@@ -38,7 +38,7 @@ tmux-tilit brings tiling window manager features and smooth keybindings to your 
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of `tmux` and `tpm`.
+- You have installed the latest version of `tmux (>= 2.7)` and [`tpm`](https://github.com/tmux-plugins/tpm).
 
 ## Installing tmux-tilit
 
@@ -52,7 +52,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 
 ### Keybindings
 
-| Keybinding                                    | Description               |
+| Keybinding                                    | Action                    |
 | --------------------------------------------- | ------------------------- |
 | <kbd>Alt</kbd> + <kbd>,</kbd>                 | Rename current window     |
 | <kbd>Alt</kbd> + <kbd>-</kbd>                 | Horizontal Split          |
@@ -66,6 +66,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Shift + M</kbd>         | Layout: Main Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + R</kbd>         | Rotate window             |
 | <kbd>Alt</kbd> + <kbd>Shift + T</kbd>         | Layout: Tiled             |
+| <kbd>Alt</kbd> + <kbd>Shift + X</kbd>         | Close window              |
 | <kbd>Alt</kbd> + <kbd>\ or /</kbd>            | Vertical Split            |
 | <kbd>Alt</kbd> + <kbd>[ or ]</kbd>            | Focus prev/next window    |
 | <kbd>Alt</kbd> + <kbd>`</kbd>                 | Last active window        |
@@ -131,10 +132,10 @@ To navigate using arrow keys, you can enable `easy-mode`
 
 The revised keybindings for the pane focus and movement then become:
 
-| Keybinding                                                                                                   | Description                   |
-| ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd>                    | Move focus left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right  |
+| Keybinding                                                          | Description                   |
+| ------------------------------------------------------------------- | ----------------------------- |
+| <kbd>Alt</kbd> + <kbd>&#8592; &#8595; &#8593; &#8594;</kbd>         | Move focus left/down/up/right |
+| <kbd>Alt</kbd> + <kbd>Shift + &#8592; &#8595; &#8593; &#8594;</kbd> | Move pane left/down/up/right  |
 
 ### More Configs
 
