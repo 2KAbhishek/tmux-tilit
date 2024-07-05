@@ -131,6 +131,7 @@ tmux $bind "${mod}\`" last-window
 tmux $bind "${mod}C" customize-mode
 tmux $bind "${mod}D" detach-client
 tmux $bind "${mod}R" rotate-window
+tmux $bind "${mod}S" synchronize-panes
 tmux $bind "${mod}X" kill-window
 tmux $bind "${mod}a" command-prompt
 tmux $bind "${mod}b" set-option status
@@ -142,6 +143,7 @@ tmux $bind "${mod}s" choose-tree
 tmux $bind "${mod}t" run-shell "tea"
 tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
+tmux $bind "${mod}y" copy-mode
 tmux $bind "${mod}z" resize-pane -Z
 
 tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"

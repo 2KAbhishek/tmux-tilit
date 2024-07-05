@@ -70,6 +70,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Shift + H/J/K/L</kbd>                 | Move pane in direction    |
 | <kbd>Alt</kbd> + <kbd>Shift + M</kbd>                       | Layout: Main Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + R</kbd>                       | Rotate window             |
+| <kbd>Alt</kbd> + <kbd>Shift + S</kbd>                       | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>Shift + T</kbd>                       | Layout: Tiled             |
 | <kbd>Alt</kbd> + <kbd>Shift + X</kbd>                       | Close window              |
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
@@ -91,6 +92,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager, [tea][2] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                               | Close pane                |
+| <kbd>Alt</kbd> + <kbd>y</kbd>                               | Copy mode                 |
 | <kbd>Alt</kbd> + <kbd>z</kbd>                               | Layout: Zoom              |
 | <kbd>Shift</kbd> + <kbd>&#8592;/&#8594;</kbd>               | Focus prev/next window    |
 
