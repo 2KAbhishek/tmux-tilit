@@ -20,10 +20,12 @@ if [ "${easymode:-}" = "on" ]; then
     # Simplified arrows.
     h='left' j='down' k='up' l='right'
     H='S-left' J='S-down' K='S-up' L='S-right'
+    left='h' down='j' up='k' right='l'
 else
     # Vim-style arrows.
     h='h' j='j' k='k' l='l'
     H='H' J='J' K='K' L='L'
+    left='left' down='down' up='up' right='right'
 fi
 
 # Determine modifier vs. prefix key.
@@ -102,6 +104,16 @@ tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${l}" select-pane -R
 
+tmux $bind "${mod}${left}" resize-pane -L 10
+tmux $bind "${mod}${down}" resize-pane -D 5
+tmux $bind "${mod}${up}" resize-pane -U 10
+tmux $bind "${mod}${right}" resize-pane -R 5
+
+tmux $bind "${mod}-" resize-pane -L 20
+tmux $bind "${mod}_" resize-pane -D 10
+tmux $bind "${mod}=" resize-pane -R 20
+tmux $bind "${mod}+" resize-pane -U 10
+
 # Alternate move between panes
 tmux bind -n S-Left previous-window
 tmux bind -n S-Right next-window
@@ -139,11 +151,9 @@ tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 
 # Splits
-tmux $bind "${mod}-" \
+tmux $bind "${mod}/" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -v -c "$cwd"'
 tmux $bind "${mod}\\" \
-    run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
-tmux $bind "${mod}/" \
     run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -h -c "$cwd"'
 
 # New pane
