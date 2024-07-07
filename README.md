@@ -42,7 +42,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Installing tmux-tilit
 
-To get tmux-tilit, add the following to your `~/.tmux.conf`:
+To get tmux-tilit, add the following to your `tmux.conf`:
 
 ```bash
 set -g @plugin '2kabhishek/tmux-tilit'
@@ -101,6 +101,35 @@ set -g @plugin '2kabhishek/tmux-tilit'
 [3]: https://github.com/laktak/extrakto
 
 ### Integrating with Neovim/Vim
+All the configured keybindings can be found in the [docs/keybindings](./docs/keybindings.md) file.
+
+### Customizing tmux-tilit
+
+#### `easymode` for arrow key navigation
+
+To navigate using arrow keys, you can enable easy mode with: `set -g @tilit-easymode 'on'`
+
+The revised keybindings for the pane focus and movement then become:
+
+| Keybinding                                                          | Description              |
+| ------------------------------------------------------------------- | ------------------------ |
+| <kbd>Alt</kbd> + <kbd>&#8592;/&#8595;/&#8593;/&#8594;</kbd>         | Focus pane in direction  |
+| <kbd>Alt</kbd> + <kbd>Shift + &#8592;/&#8595;/&#8593;/&#8594;</kbd> | Move pane in direction   |
+| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                                 | Resize pane in direction |
+
+#### `layout` for customizing default layout
+
+You can set the default layout with `set -g @tilit-default 'layout'`, this will be used when creating new windows or panes.
+
+Available layouts are:
+
+- `main-vertical`
+- `main-horizontal`
+- `tiled`
+- `even-vertical`
+- `even-horizontal`
+
+#### `navigator` for integrating with vim/neovim
 
 To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5]
 
@@ -110,12 +139,12 @@ Then, in your `~/.tmux.conf` add:
 set -g @tilit-navigator 'on'
 ```
 
-This will let you seamlessly navigate between vim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
+This will let you seamlessly navigate between vim/neovim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
 
 [4]: https://github.com/numToStr/Navigator.nvim
 [5]: https://github.com/christoomey/vim-tmux-navigator
 
-### Integrating with window managers
+#### `prefix` for integrating with window managers
 
 If your window manager uses <kbd>Alt</kbd> as default modifier, it's recommended to switch to <kbd>Super</kbd> or <kbd>Meta</kbd> for a smoother experience.
 
@@ -128,36 +157,15 @@ set -g repeat-time 1000
 
 This will let you hit <kbd>Alt</kbd> + <kbd>Space</kbd> and then a key to perform an action, repeat time lets you run more actions with a single prefix.
 
-### Easy Mode
+#### `shiftnum` for working with international keyboards
 
-To navigate using arrow keys, you can enable `easy-mode`
-
-    set -g @tilit-easymode 'on'
-
-The revised keybindings for the pane focus and movement then become:
-
-| Keybinding                                                          | Description              |
-| ------------------------------------------------------------------- | ------------------------ |
-| <kbd>Alt</kbd> + <kbd>&#8592;/&#8595;/&#8593;/&#8594;</kbd>         | Focus pane in direction  |
-| <kbd>Alt</kbd> + <kbd>Shift + &#8592;/&#8595;/&#8593;/&#8594;</kbd> | Move pane in direction   |
-| <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                                 | Resize pane in direction |
-
-### More Configs
+You can set the `@tilit-shiftnum` option to match your keyboard layout:
 
 ```bash
-# Default Workspace
-set -g @tilit-default 'main-vertical'
-
-# Sane defaults
-set -s escape-time 0
-set -g base-index 1
-set -g repeat-time 1000
-
-# Enable application launcher
-set -g @tilit-dmenu 'on'
-
-# Fix Shift + num keybinding for international keyboards
-set -g @tilit-shiftnum '!"£$%^&*()' # for UK layout
+# US Keyboard
+set -g @tilit-shiftnum '!@#$%^&*()'
+# UK Keyboard
+set -g @tilit-shiftnum '!"£$%^&*()'
 ```
 
 ## How I built this
