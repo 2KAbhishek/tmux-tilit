@@ -121,28 +121,6 @@ bind_layout "${mod}m" 'main-vertical'
 bind_layout "${mod}M" 'main-horizontal'
 bind_layout "${mod}T" 'tiled'
 
-# Alternate move between panes
-tmux bind -n S-Left previous-window
-tmux bind -n S-Right next-window
-
-# Prefix keys
-tmux bind r source-file "$config_path" \; display-message "Config Reloaded."
-tmux bind -r H resize-pane -L 10
-tmux bind -r L resize-pane -R 10
-tmux bind -r K resize-pane -U 5
-tmux bind -r J resize-pane -D 5
-
-# Passthrough C-hjkl
-tmux bind C-h send-keys 'C-h'
-tmux bind C-j send-keys 'C-j'
-tmux bind C-k send-keys 'C-k'
-tmux bind C-l send-keys 'C-l'
-
-# Copy mode bindings
-tmux bind-key -T copy-mode-vi 'v' send -X begin-selection
-tmux bind-key -T copy-mode-vi 'y' send -X copy-selection
-tmux bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
-
 tmux $bind "${mod}${left}" resize-pane -L 10
 tmux $bind "${mod}${down}" resize-pane -D 5
 tmux $bind "${mod}${up}" resize-pane -U 10
@@ -185,23 +163,38 @@ tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
-tmux $bind "${mod}r" source-file $config_path\\\; display "Config reloaded"
+tmux $bind "${mod}r" source-file $config_path\\\; display-message "Config Reloaded"
 tmux $bind "${mod}s" choose-tree
 tmux $bind "${mod}t" run-shell "tea"
 tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
 tmux $bind "${mod}y" copy-mode
 tmux $bind "${mod}z" resize-pane -Z
+tmux $bind "${mod}d" \
+    select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
+
+# Alternate move between panes
+tmux bind -n S-Left previous-window
+tmux bind -n S-Right next-window
+
+# Prefix keys
+tmux bind r source-file "$config_path"\\\; display-message "Config Reloaded"
+tmux bind -r H resize-pane -L 10
+tmux bind -r L resize-pane -R 10
+tmux bind -r K resize-pane -U 5
+tmux bind -r J resize-pane -D 5
+
+# Passthrough C-hjkl
+tmux bind C-h send-keys 'C-h'
+tmux bind C-j send-keys 'C-j'
+tmux bind C-k send-keys 'C-k'
+tmux bind C-l send-keys 'C-l'
+
+# Copy mode bindings
+tmux bind-key -T copy-mode-vi 'v' send -X begin-selection
+tmux bind-key -T copy-mode-vi 'y' send -X copy-selection
+tmux bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
 
 # Autorefresh layout after deleting a pane.
 tmux set-hook -g after-split-window "select-layout; select-layout -E"
 tmux set-hook -g pane-exited "select-layout; select-layout -E"
-
-# Integrate with `fzf` to approximate `dmenu`
-if [ -n "$(command -v fzf)" ]; then
-    tmux $bind "${mod}d" \
-        select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
-else
-    tmux $bind "${mod}d" \
-        display 'To enable this function, install `fzf` and restart `tmux`.'
-fi
