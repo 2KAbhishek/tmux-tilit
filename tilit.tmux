@@ -1,7 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
-# shellcheck disable=SC2250
 
 # Read user options.
 for opt in easymode layout navigator prefix shiftnum; do
@@ -62,11 +61,6 @@ fi
 
 config_path="$HOME/.config/tmux/tmux.conf"
 plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
-
-exec_launcher='bash -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    exec_launcher='bash -c "exec $(echo $PATH | tr ":" "\n" | while read -r dir; do find "$dir" -maxdepth 1 -type f -perm +111 2>/dev/null; done | sort -u | fzf)"'
-fi
 
 char_at() {
     echo $1 | cut -c $2
@@ -157,7 +151,7 @@ tmux $bind "${mod}X" kill-window
 tmux $bind "${mod}a" command-prompt
 tmux $bind "${mod}b" set-option status
 tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
-tmux $bind "${mod}d" select-pane -t '{bottom-right}' \\\; split-pane "$exec_launcher"
+tmux $bind "${mod}d" select-pane -t '{bottom-right}' \\\; split-pane "bash -c dexe"
 tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pane_id}\""
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 tmux $bind "${mod}${h}" select-pane -L

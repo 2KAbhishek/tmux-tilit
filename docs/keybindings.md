@@ -26,7 +26,7 @@
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                               | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>c</kbd>                               | Edit config               |
-| <kbd>Alt</kbd> + <kbd>d</kbd>                               | Executable launcher       |
+| <kbd>Alt</kbd> + <kbd>d</kbd>                               | Run launcher, [dexe][4]   |
 | <kbd>Alt</kbd> + <kbd>e</kbd>                               | Layout: Even Vertical     |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][3]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                               | Open lazygit              |
@@ -81,3 +81,4 @@ Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/2KAbhishek/tmux-tea
 [3]: https://github.com/laktak/extrakto
+[1]: https://github.com/2KAbhishek/dexe
