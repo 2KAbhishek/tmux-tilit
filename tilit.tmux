@@ -4,26 +4,43 @@
 # shellcheck disable=SC2250
 
 # Read user options.
-for opt in default dmenu easymode navigator prefix shiftnum; do
+for opt in easymode layout navigator prefix shiftnum; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
 done
 
-# Default to US keyboard layout, unless something is configured.
-if [ -z "$shiftnum" ]; then
-    shiftnum='!@#$%^&*()'
-fi
-
 # Determine "arrow types".
 if [ "${easymode:-}" = "on" ]; then
-    # Simplified arrows.
     h='left' j='down' k='up' l='right'
     H='S-left' J='S-down' K='S-up' L='S-right'
     left='h' down='j' up='k' right='l'
 else
-    # Vim-style arrows.
     h='h' j='j' k='k' l='l'
     H='H' J='J' K='K' L='L'
     left='left' down='down' up='up' right='right'
+fi
+
+# Autoselect default layout after creating new window.
+if [ -n "${layout:-}" ]; then
+    tmux set-hook -g window-linked "select-layout \"$layout\"; select-layout -E"
+    tmux select-layout "$layout"
+    tmux select-layout -E
+fi
+
+# If `@tilit-navigator` is on, integrate Ctrl + hjkl with `vim-tmux-navigator`/'Navigator.nvim' configs
+if [ "${navigator:-}" = "on" ]; then
+    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+    tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+    tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+    tmux bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+    tmux bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+    tmux bind-key -n C-\\ if-shell "$is_vim" "send-keys C-\\\\" "select-pane -l"
+
+    tmux bind-key -T copy-mode-vi C-h select-pane -L
+    tmux bind-key -T copy-mode-vi C-j select-pane -D
+    tmux bind-key -T copy-mode-vi C-k select-pane -U
+    tmux bind-key -T copy-mode-vi C-l select-pane -R
+    tmux bind-key -T copy-mode-vi C-\\ select-pane -l
 fi
 
 # Determine modifier vs. prefix key.
@@ -38,6 +55,10 @@ if [ -n "$prefix" ]; then
     tmux bind -n "$prefix" switch-client -T tilit
 fi
 
+# Use US keyboard layout, unless configured
+if [ -z "$shiftnum" ]; then
+    shiftnum='!@#$%^&*()'
+fi
 char_at() {
     echo $1 | cut -c $2
 }
@@ -167,33 +188,8 @@ tmux $bind "${mod}enter" \
 tmux set-hook -g after-split-window "select-layout; select-layout -E"
 tmux set-hook -g pane-exited "select-layout; select-layout -E"
 
-# Autoselect layout after creating new window.
-if [ -n "${default:-}" ]; then
-    tmux set-hook -g window-linked "select-layout \"$default\"; select-layout -E"
-    tmux select-layout "$default"
-    tmux select-layout -E
-fi
-
-# If `@tilit-navigator` is nonzero, integrate Ctrl + hjkl with `vim-tmux-navigator`/'Navigator.nvim'.
-# This assumes that your Vim/Neovim is setup to use Ctrl + hjkl bindings as well.
-if [ "${navigator:-}" = "on" ]; then
-    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-
-    tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
-    tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
-    tmux bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
-    tmux bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
-    tmux bind-key -n C-\\ if-shell "$is_vim" "send-keys C-\\\\" "select-pane -l"
-
-    tmux bind-key -T copy-mode-vi C-h select-pane -L
-    tmux bind-key -T copy-mode-vi C-j select-pane -D
-    tmux bind-key -T copy-mode-vi C-k select-pane -U
-    tmux bind-key -T copy-mode-vi C-l select-pane -R
-    tmux bind-key -T copy-mode-vi C-\\ select-pane -l
-fi
-
 # Integrate with `fzf` to approximate `dmenu`
-if [ -n "$(command -v fzf)" ] && [ "${dmenu:-}" = "on" ]; then
+if [ -n "$(command -v fzf)" ]; then
     tmux $bind "${mod}d" \
         select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
 else
