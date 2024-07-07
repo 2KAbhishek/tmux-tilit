@@ -46,6 +46,37 @@
 | <kbd>Alt</kbd> + <kbd>z</kbd>                               | Layout: Zoom              |
 | <kbd>Shift</kbd> + <kbd>&#8592;/&#8594;</kbd>               | Focus prev/next window    |
 
+## Prefix Bindings
+
+tmux-tilit sets up keybindings that work with the tmux `prefix` key:
+
+| Keybinding         | Action                   |
+| ------------------ | ------------------------ |
+| <kbd>H/J/K/L</kbd> | Resize pane in direction |
+| <kbd>r</kbd>       | Reload config            |
+
+> Default `prefix` key is <kbd>Ctrl</kbd> + <kbd>b</kbd>, I recommend <kbd>Ctrl</kbd> + <kbd>a</kbd>
+
+You can remap the `prefix` key by adding this to your `tmux.conf`:
+
+```bash
+# Change prefix
+set -g prefix C-a
+bind C-a send-prefix
+```
+
+## Copy Mode Bindings
+
+Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
+
+> This mode supports vi navigation keys by default
+
+| Keybinding                  | Action                      |
+| --------------------------- | --------------------------- |
+| <kbd>y</kbd>                | Copy                        |
+| <kbd>C</kbd> + <kbd>v</kbd> | Toggle block/rectangle mode |
+| <kbd>v</kbd>                | Start selection             |
+| <kbd>V</kbd>                | Line selection              |
 
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/2KAbhishek/tmux-tea
