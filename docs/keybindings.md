@@ -18,9 +18,9 @@
 | <kbd>Alt</kbd> + <kbd>Shift + D</kbd>                       | Detach                    |
 | <kbd>Alt</kbd> + <kbd>Shift + E</kbd>                       | Layout: Even Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + H/J/K/L</kbd>                 | Move pane in direction    |
+| <kbd>Alt</kbd> + <kbd>Shift + I</kbd>                       | Open tilit keybindings    |
 | <kbd>Alt</kbd> + <kbd>Shift + M</kbd>                       | Layout: Main Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + R</kbd>                       | Rotate window             |
-| <kbd>Alt</kbd> + <kbd>Shift + S</kbd>                       | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>Shift + T</kbd>                       | Layout: Tiled             |
 | <kbd>Alt</kbd> + <kbd>Shift + X</kbd>                       | Close window              |
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
@@ -31,7 +31,7 @@
 | <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][3]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                               | Open lazygit              |
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                         | Focus pane in direction   |
-| <kbd>Alt</kbd> + <kbd>i</kbd>                               | Open tilit Readme         |
+| <kbd>Alt</kbd> + <kbd>i</kbd>                               | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>m</kbd>                               | Layout: Main Vertical     |
 | <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show all notes, [tdo][1]  |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                               | Open floating terminal    |

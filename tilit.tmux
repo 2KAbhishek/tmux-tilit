@@ -167,8 +167,8 @@ tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
 tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
 tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
 tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
+tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/docs/keybindings.md"
 tmux $bind "${mod}R" rotate-window
-tmux $bind "${mod}S" synchronize-panes
 tmux $bind "${mod}X" kill-window
 
 tmux $bind "${mod}a" command-prompt
@@ -180,7 +180,7 @@ tmux $bind "${mod}${h}" select-pane -L
 tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${l}" select-pane -R
-tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
+tmux $bind "${mod}i" setw synchronize-panes\\\; display-message "Synchronize panes #{?pane_synchronized,on,off}"
 tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 tmux $bind "${mod}p" last-pane
