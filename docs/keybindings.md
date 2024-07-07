@@ -26,7 +26,7 @@
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                               | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>c</kbd>                               | Edit config               |
-| <kbd>Alt</kbd> + <kbd>d</kbd>                               | tmux dmenu launcher       |
+| <kbd>Alt</kbd> + <kbd>d</kbd>                               | Executable launcher       |
 | <kbd>Alt</kbd> + <kbd>e</kbd>                               | Layout: Even Vertical     |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][3]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                               | Open lazygit              |
