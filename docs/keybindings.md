@@ -1,4 +1,4 @@
-# tilit Keybindings
+# [tmux-tilit](https://github.com/2KAbhishek/tmux-tilit) [Keybindings](https://github.com/2KAbhishek/tmux-tilit/blob/main/docs/keybindings.md)
 
 ## General Bindings
 
