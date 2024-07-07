@@ -52,7 +52,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 
 ### Keybindings
 
-All the configured keybindings can be found in the [docs/keybindings](./docs/keybindings.md) file.
+All the configured keybindings can be found in the [keybinding manual here](./docs/keybindings.md).
 
 ### Customizing tmux-tilit
 
