@@ -3,8 +3,6 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2250
 
-config_path="$HOME/.config/tmux/tmux.conf"
-
 # Read user options.
 for opt in default dmenu easymode navigator prefix shiftnum; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
@@ -98,6 +96,9 @@ bind_layout "${mod}m" 'main-vertical'
 bind_layout "${mod}M" 'main-horizontal'
 bind_layout "${mod}T" 'tiled'
 
+config_path="$HOME/.config/tmux/tmux.conf"
+plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
+
 # Focus on pane
 tmux $bind "${mod}${h}" select-pane -L
 tmux $bind "${mod}${j}" select-pane -D
@@ -135,7 +136,12 @@ tmux $bind "${mod}S" synchronize-panes
 tmux $bind "${mod}X" kill-window
 tmux $bind "${mod}a" command-prompt
 tmux $bind "${mod}b" set-option status
-tmux $bind "${mod}f" run-shell "$TMUX_PLUGIN_MANAGER_PATH/extrakto/scripts/open.sh"
+tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
+tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pane_id}\""
+tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
+tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
+tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
+tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
 tmux $bind "${mod}r" source-file $config_path\\\; display "Config reloaded"
@@ -145,12 +151,6 @@ tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
 tmux $bind "${mod}y" copy-mode
 tmux $bind "${mod}z" resize-pane -Z
-
-tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
-tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
-tmux $bind "${mod}i" display-popup -w "90%" -h "90%" -E "$EDITOR $TMUX_PLUGIN_MANAGER_PATH/tmux-tilit/README.md"
-tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
-tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 
 # Splits
 tmux $bind "${mod}/" \
