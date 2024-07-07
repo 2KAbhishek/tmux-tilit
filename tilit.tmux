@@ -63,7 +63,7 @@ fi
 config_path="$HOME/.config/tmux/tmux.conf"
 plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
 
-exec_launcher='"exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
+exec_launcher='bash -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     exec_launcher='bash -c "exec $(echo $PATH | tr ":" "\n" | while read -r dir; do find "$dir" -maxdepth 1 -type f -perm +111 2>/dev/null; done | sort -u | fzf)"'
 fi
