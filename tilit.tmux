@@ -125,6 +125,23 @@ bind_layout "${mod}T" 'tiled'
 tmux bind -n S-Left previous-window
 tmux bind -n S-Right next-window
 
+# Prefix keys
+tmux bind r source-file "$config_path" \; display-message "Config Reloaded."
+tmux bind -r H resize-pane -L 10
+tmux bind -r L resize-pane -R 10
+tmux bind -r K resize-pane -U 5
+tmux bind -r J resize-pane -D 5
+
+# Passthrough C-hjkl
+tmux bind C-h send-keys 'C-h'
+tmux bind C-j send-keys 'C-j'
+tmux bind C-k send-keys 'C-k'
+tmux bind C-l send-keys 'C-l'
+
+# Copy mode bindings
+tmux bind-key -T copy-mode-vi 'v' send -X begin-selection
+tmux bind-key -T copy-mode-vi 'y' send -X copy-selection
+tmux bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
 
 tmux $bind "${mod}${left}" resize-pane -L 10
 tmux $bind "${mod}${down}" resize-pane -D 5
