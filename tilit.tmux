@@ -171,7 +171,7 @@ tmux $bind "${mod}x" kill-pane
 tmux $bind "${mod}y" copy-mode
 tmux $bind "${mod}z" resize-pane -Z
 tmux $bind "${mod}d" \
-    select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec \$(echo \"\$PATH\" | tr \":\" \"\n\" | xargs -I{} -- find {} -maxdepth 1 -mindepth 1 -executable 2>/dev/null | sort -u | fzf)"'
+    select-pane -t '{bottom-right}' \\\; split-pane 'sh -c "exec $(echo $PATH | tr ":" "\n" | while read -r dir; do find "$dir" -maxdepth 1 -type f -perm +111 2>/dev/null; done | sort -u | fzf)"'
 
 # Alternate move between panes
 tmux bind -n S-Left previous-window
