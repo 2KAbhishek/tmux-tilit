@@ -32,7 +32,7 @@
 
 ## What is this
 
-tmux-tilit brings tiling window manager features and smooth keybindings to your tmux sessions, boosting your productivity like never before.
+tmux-tilit brings tiling window manager features and intuitive keybindings to your tmux workflows, boosting your productivity like never before.
 
 ## Prerequisites
 
