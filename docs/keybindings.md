@@ -26,20 +26,20 @@
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                               | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>c</kbd>                               | Edit config               |
-| <kbd>Alt</kbd> + <kbd>d</kbd>                               | Run launcher, [dexe][4]   |
+| <kbd>Alt</kbd> + <kbd>d</kbd>                               | Run launcher, [dexe][3]   |
 | <kbd>Alt</kbd> + <kbd>e</kbd>                               | Layout: Even Vertical     |
-| <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][3]  |
+| <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][2]  |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                               | Open lazygit              |
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                         | Focus pane in direction   |
 | <kbd>Alt</kbd> + <kbd>i</kbd>                               | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>m</kbd>                               | Layout: Main Vertical     |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show all notes, [tdo][1]  |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show all notes [tdo][1]   |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                               | Open floating terminal    |
 | <kbd>Alt</kbd> + <kbd>p</kbd>                               | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>q</kbd>                               | Close session             |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                               | Reload config             |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                               | Switch between all panse  |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager, [tea][2] |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                               | Show daily todos [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                               | Close pane                |
 | <kbd>Alt</kbd> + <kbd>y</kbd>                               | Copy mode                 |
@@ -79,6 +79,5 @@ Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 | <kbd>V</kbd>                | Line selection              |
 
 [1]: https://github.com/2KAbhishek/tdo
-[2]: https://github.com/2KAbhishek/tmux-tea
-[3]: https://github.com/laktak/extrakto
-[4]: https://github.com/2KAbhishek/dexe
+[2]: https://github.com/laktak/extrakto
+[3]: https://github.com/2KAbhishek/dexe

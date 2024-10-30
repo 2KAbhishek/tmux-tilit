@@ -165,7 +165,7 @@ tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
 tmux $bind "${mod}r" source-file $config_path\\\; display-message "Config Reloaded"
 tmux $bind "${mod}s" choose-tree
-tmux $bind "${mod}t" run-shell "tea"
+tmux $bind "${mod}t" display-popup -w "80%" -h "80%" -d "$NOTES_DIR" -E "tdo"
 tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
 tmux $bind "${mod}y" copy-mode
