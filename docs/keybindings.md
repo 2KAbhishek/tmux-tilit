@@ -39,7 +39,8 @@
 | <kbd>Alt</kbd> + <kbd>q</kbd>                               | Close session             |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                               | Reload config             |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                               | Switch between all panse  |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                               | Show daily todos [tdo][1] |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager [tea][1]  |
+| <kbd>Alt</kbd> + <kbd>u</kbd>                               | Show daily todos [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                               | Close pane                |
 | <kbd>Alt</kbd> + <kbd>y</kbd>                               | Copy mode                 |
@@ -81,3 +82,4 @@ Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/laktak/extrakto
 [3]: https://github.com/2KAbhishek/dexe
+[1]: https://github.com/2KAbhishek/tmux-tea
