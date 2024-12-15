@@ -27,7 +27,7 @@ fi
 
 # If `@tilit-navigator` is on, integrate Ctrl + hjkl with `vim-tmux-navigator`/'Navigator.nvim' configs
 if [ "${navigator:-}" = "on" ]; then
-    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
 
     tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
     tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
