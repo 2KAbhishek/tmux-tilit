@@ -159,14 +159,14 @@ tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${l}" select-pane -R
 tmux $bind "${mod}i" setw synchronize-panes\\\; display-message "Synchronize panes #{?pane_synchronized,on,off}"
-tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -f"
+tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo"
+tmux $bind "${mod}N" display-popup -w "80%" -h "80%" -d "$NOTES_DIR" -E "tdo -F"
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
 tmux $bind "${mod}r" source-file $config_path\\\; display-message "Config Reloaded"
 tmux $bind "${mod}s" choose-tree
 tmux $bind "${mod}t" run-shell "tea"
-tmux $bind "${mod}u" display-popup -w "80%" -h "80%" -d "$NOTES_DIR" -E "tdo"
 tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
 tmux $bind "${mod}y" copy-mode

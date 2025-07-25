@@ -33,14 +33,14 @@
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                         | Focus pane in direction   |
 | <kbd>Alt</kbd> + <kbd>i</kbd>                               | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>m</kbd>                               | Layout: Main Vertical     |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show all notes [tdo][1]   |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show daily todos [tdo][1] |
+| <kbd>Alt</kbd> + <kbd>N</kbd>                               | Show all notes [tdo][1]   |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                               | Open floating terminal    |
 | <kbd>Alt</kbd> + <kbd>p</kbd>                               | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>q</kbd>                               | Close session             |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                               | Reload config             |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                               | Switch between all panse  |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager [tea][1]  |
-| <kbd>Alt</kbd> + <kbd>u</kbd>                               | Show daily todos [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                               | Close pane                |
 | <kbd>Alt</kbd> + <kbd>y</kbd>                               | Copy mode                 |
