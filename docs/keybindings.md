@@ -82,4 +82,4 @@ Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 [1]: https://github.com/2KAbhishek/tdo
 [2]: https://github.com/laktak/extrakto
 [3]: https://github.com/2KAbhishek/dexe
-[1]: https://github.com/2KAbhishek/tmux-tea
+[4]: https://github.com/2KAbhishek/tmux-tea
