@@ -34,6 +34,15 @@
 
 tmux-tilit brings tiling window manager features and intuitive keybindings to your tmux workflows, boosting your productivity like never before.
 
+## Features
+
+- **Intuitive Tiling Management**: Split and arrange panes, layouts, workspaces with intuitive keybindings similar to tiling window managers
+- **Vim/Neovim Integration**: Seamless navigation between vim/neovim splits and tmux panes with Navigator support
+- **External Tools**: Integration with utilities like lazygit, extrakto for text grabbing and [tdo](https://github.com/2KAbhishek/tdo) for notes management
+- **Session Management**: Integration with [tea](https://github.com/2KAbhishek/tmux-tea) for session management
+- **Prefix Mode**: Optional prefix mode for compatibility with window managers that use Alt as default modifier
+- **International Keyboard Support**: Configurable shift+number mappings for different keyboard layouts
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
