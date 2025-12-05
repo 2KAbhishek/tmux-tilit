@@ -126,6 +126,12 @@ set -g prefix C-a
 bind C-a send-prefix
 ```
 
+If you have the configuration into a non default path you can set it like this:
+
+```bash
+set -g @config_path '$HOME/.tmux.conf'
+```
+
 #### Copy Mode Bindings
 
 Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:

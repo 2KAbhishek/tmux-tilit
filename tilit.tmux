@@ -59,7 +59,7 @@ if [ -z "$shiftnum" ]; then
     shiftnum='!@#$%^&*()'
 fi
 
-config_path="$HOME/.config/tmux/tmux.conf"
+config_path=$(tmux show-option -gqv @config_path || echo $HOME/.config/tmux/tmux.conf)
 plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
 
 char_at() {
