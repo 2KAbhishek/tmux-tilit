@@ -3,7 +3,7 @@
 # shellcheck disable=SC2086
 
 # Read user options.
-for opt in easymode layout navigator prefix shiftnum; do
+for opt in easymode layout navigator prefix shiftnum config; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
 done
 
@@ -59,7 +59,7 @@ if [ -z "$shiftnum" ]; then
     shiftnum='!@#$%^&*()'
 fi
 
-config_path="$HOME/.config/tmux/tmux.conf"
+config_path="${config:-$HOME/.tmux.conf}"
 plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
 
 char_at() {

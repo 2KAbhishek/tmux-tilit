@@ -209,6 +209,16 @@ set -g @tilit-shiftnum '!@#$%^&*()'
 set -g @tilit-shiftnum '!"£$%^&*()'
 ```
 
+#### `config` for custom tmux config location
+
+By default, tmux-tilit uses `$HOME/.tmux.conf` for config-related operations (reload, edit).
+
+If your config is in a different location, you can set:
+
+```bash
+set -g @tilit-config "$HOME/.config/tmux/tmux.conf"
+```
+
 ## How I built this
 
 Major credits to [tmux-tilish](https://github.com/jabirali/tmux-tilish) for the inspiration
