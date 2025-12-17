@@ -83,11 +83,13 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Shift + T</kbd>                       | Layout: Tiled             |
 | <kbd>Alt</kbd> + <kbd>Shift + X</kbd>                       | Close window              |
 | <kbd>Alt</kbd> + <kbd>a</kbd>                               | Command mode              |
+| <kbd>Alt</kbd> + <kbd>A</kbd>                               | Copilot CLI               |
 | <kbd>Alt</kbd> + <kbd>b</kbd>                               | Toggle status bar         |
 | <kbd>Alt</kbd> + <kbd>c</kbd>                               | Edit config               |
 | <kbd>Alt</kbd> + <kbd>d</kbd>                               | Run launcher, [dexe][3]   |
 | <kbd>Alt</kbd> + <kbd>e</kbd>                               | Layout: Even Vertical     |
 | <kbd>Alt</kbd> + <kbd>f</kbd>                               | Text grab, [extrakto][2]  |
+| <kbd>Alt</kbd> + <kbd>F</kbd>                               | Fuzzy edit files          |
 | <kbd>Alt</kbd> + <kbd>g</kbd>                               | Open lazygit              |
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                         | Focus pane in direction   |
 | <kbd>Alt</kbd> + <kbd>i</kbd>                               | Synchronize pane inputs   |

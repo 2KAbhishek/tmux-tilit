@@ -149,10 +149,12 @@ tmux $bind "${mod}R" rotate-window
 tmux $bind "${mod}X" kill-window
 
 tmux $bind "${mod}a" command-prompt
+tmux $bind "${mod}A" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "copilot"
 tmux $bind "${mod}b" set-option status
 tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
 tmux $bind "${mod}d" select-pane -t '{bottom-right}' \\\; split-pane "bash -c dexe --wait-before-exit"
 tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pane_id}\""
+tmux $bind "${mod}F" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR \"\$(fzf)\""
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 tmux $bind "${mod}${h}" select-pane -L
 tmux $bind "${mod}${j}" select-pane -D
