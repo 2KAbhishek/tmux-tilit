@@ -100,6 +100,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>p</kbd>                               | Last active pane          |
 | <kbd>Alt</kbd> + <kbd>q</kbd>                               | Close session             |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                               | Reload config             |
+| <kbd>Alt</kbd> + <kbd>R</kbd>                               | Open README               |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                               | Switch between all panse  |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager [tea][1]  |
 | <kbd>Alt</kbd> + <kbd>T</kbd>                               | Show all pending [tdo][1] |

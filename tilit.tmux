@@ -167,6 +167,7 @@ tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -
 tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
 tmux $bind "${mod}r" source-file $config_path\\\; display-message "Config Reloaded"
+tmux $bind "${mod}R" display-popup -w "90%" -h "90%" -E "$EDITOR README.md"
 tmux $bind "${mod}s" choose-tree
 tmux $bind "${mod}t" run-shell "tea"
 tmux $bind "${mod}T" display-popup -w "80%" -h "80%" -d "$NOTES_DIR" -E "tdo -t"
