@@ -66,7 +66,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>`</kbd>                               | Last active window        |
 | <kbd>Alt</kbd> + <kbd>,</kbd>                               | Rename current window     |
 | <kbd>Alt</kbd> + <kbd>/</kbd>                               | Horizontal Split          |
-| <kbd>Alt</kbd> + <kbd>\</kbd>                               | Vertical Split            |
+| <kbd>Alt</kbd> + <kbd>\\</kbd>                              | Vertical Split            |
 | <kbd>Alt</kbd> + <kbd>[ or ]</kbd>                          | Focus prev/next window    |
 | <kbd>Alt</kbd> + <kbd>- / =</kbd>                           | Increase / Decrease width |
 | <kbd>Alt</kbd> + <kbd>&#8592;/&#8595;/&#8593;/&#8594;</kbd> | Resize pane in direction  |
