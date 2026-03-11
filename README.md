@@ -101,7 +101,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>q</kbd>                               | Close session             |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                               | Reload config             |
 | <kbd>Alt</kbd> + <kbd>R</kbd>                               | Open README               |
-| <kbd>Alt</kbd> + <kbd>s</kbd>                               | Switch between all panse  |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                               | Show all panes            |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager [tea][1]  |
 | <kbd>Alt</kbd> + <kbd>T</kbd>                               | Show all pending [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
@@ -233,7 +233,7 @@ Making sure the keybindings work across different command line programs and envi
 
 ## What I learned
 
-- Learned more about the tmux api.
+- Learned more about the tmux API.
 
 ## What's next
 
