@@ -3,7 +3,7 @@
 # shellcheck disable=SC2086
 
 # Read user options.
-for opt in easymode layout navigator prefix shiftnum config; do
+for opt in easymode layout navigator prefix mod shiftnum config; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
 done
 
@@ -44,7 +44,8 @@ fi
 
 # Determine modifier vs. prefix key.
 if [ -z "${prefix:-}" ]; then
-    bind='bind -n' mod='M-'
+    bind='bind -n'
+    mod="${mod:-M-}"
 else
     bind='bind -rT tilit' mod=''
 fi

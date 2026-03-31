@@ -188,6 +188,22 @@ This will let you seamlessly navigate between vim/neovim splits and tmux panes w
 [4]: https://github.com/numToStr/Navigator.nvim
 [5]: https://github.com/christoomey/vim-tmux-navigator
 
+#### `mod` for customizing the modifier key
+
+By default, tmux-tilit uses `M-` (Alt/Meta) as the modifier for direct keybindings.
+
+You can change it to another tmux modifier prefix:
+
+```bash
+# Default
+set -g @tilit-mod 'M-'
+
+# Example: Ctrl-based bindings
+set -g @tilit-mod 'C-'
+```
+
+`@tilit-mod` is used only in non-prefix mode.
+
 #### `prefix` for integrating with window managers
 
 If your window manager uses <kbd>Alt</kbd> as default modifier, it's recommended to switch to <kbd>Super</kbd> or <kbd>Meta</kbd> for a smoother experience.
