@@ -117,15 +117,7 @@ tmux-tilit sets up keybindings that work with the tmux `prefix` key:
 | <kbd>H/J/K/L</kbd> | Resize pane in direction |
 | <kbd>r</kbd>       | Reload config            |
 
-> Default `prefix` key is <kbd>Ctrl</kbd> + <kbd>b</kbd>, I recommend <kbd>Ctrl</kbd> + <kbd>a</kbd>
-
-You can remap the `prefix` key by adding this to your `tmux.conf`:
-
-```bash
-# Change prefix
-set -g prefix C-a
-bind C-a send-prefix
-```
+> Default `prefix` key is <kbd>Ctrl</kbd> + <kbd>b</kbd>
 
 #### Copy Mode Bindings
 
@@ -146,6 +138,16 @@ Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 [4]: https://github.com/2KAbhishek/tmux-tea
 
 ### Customizing tmux-tilit
+
+#### `config` for custom tmux config location
+
+By default, tmux-tilit uses `$HOME/.tmux.conf` for config-related operations (reload, edit).
+
+If your config is in a different location, you can set:
+
+```bash
+set -g @tilit-config "$HOME/.config/tmux/tmux.conf"
+```
 
 #### `easymode` for arrow key navigation
 
@@ -171,21 +173,6 @@ Available layouts are:
 - `even-vertical`
 - `even-horizontal`
 
-#### `navigator` for integrating with vim/neovim
-
-To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5]
-
-Then, in your `~/.tmux.conf` add:
-
-```bash
-set -g @tilit-navigator 'on'
-```
-
-This will let you seamlessly navigate between vim/neovim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
-
-[4]: https://github.com/numToStr/Navigator.nvim
-[5]: https://github.com/christoomey/vim-tmux-navigator
-
 #### `mod` for customizing the modifier key
 
 By default, tmux-tilit uses `M-` (Alt/Meta) as the modifier for direct keybindings.
@@ -202,18 +189,36 @@ set -g @tilit-mod 'C-'
 
 `@tilit-mod` is used only in non-prefix mode.
 
+#### `navigator` for integrating with vim/neovim
+
+To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5]
+
+Then, in your `~/.tmux.conf` add:
+
+```bash
+set -g @tilit-navigator 'on'
+```
+
+This will let you seamlessly navigate between vim/neovim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
+
+[4]: https://github.com/numToStr/Navigator.nvim
+[5]: https://github.com/christoomey/vim-tmux-navigator
+
 #### `prefix` for integrating with window managers
 
 If your window manager uses <kbd>Alt</kbd> as default modifier, it's recommended to switch to <kbd>Super</kbd> or <kbd>Meta</kbd> for a smoother experience.
 
-If you do not want to do that you can enable prefix mode and faster repeat-time in tmux:
+If you do not want to do that you can enable prefix mode for tmux-tilit:
 
 ```bash
-set -g @tilit-prefix 'C-Space'
+set -g @tilit-prefix 'C-space' # or any other key combo
 set -g repeat-time 1000
 ```
 
-This will let you hit <kbd>Alt</kbd> + <kbd>Space</kbd> and then a key to perform an action, repeat time lets you run more actions with a single prefix.
+This will let you hit <kbd>Ctrl</kbd> + <kbd>space</kbd> and then a key to perform an action, repeat-time lets you run more actions with a single prefix.
+
+> Note: This prefix is different from the tmux default prefix
+> If you do not use C-a as your tmux prefix - I highly recommend using that as the tilit-prefix and set the tmux-prefix back to C-b
 
 #### `shiftnum` for working with international keyboards
 
@@ -224,16 +229,6 @@ You can set the `@tilit-shiftnum` option to match your keyboard layout:
 set -g @tilit-shiftnum '!@#$%^&*()'
 # UK Keyboard
 set -g @tilit-shiftnum '!"£$%^&*()'
-```
-
-#### `config` for custom tmux config location
-
-By default, tmux-tilit uses `$HOME/.tmux.conf` for config-related operations (reload, edit).
-
-If your config is in a different location, you can set:
-
-```bash
-set -g @tilit-config "$HOME/.config/tmux/tmux.conf"
 ```
 
 ## How I built this
