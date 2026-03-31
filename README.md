@@ -210,7 +210,7 @@ If your window manager uses <kbd>Alt</kbd> as default modifier, it's recommended
 If you do not want to do that you can enable prefix mode and faster repeat-time in tmux:
 
 ```bash
-set -g @tilit-prefix 'M-space'
+set -g @tilit-prefix 'C-Space'
 set -g repeat-time 1000
 ```
 
