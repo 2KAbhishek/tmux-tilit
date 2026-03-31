@@ -94,7 +94,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>                         | Focus pane in direction   |
 | <kbd>Alt</kbd> + <kbd>i</kbd>                               | Synchronize pane inputs   |
 | <kbd>Alt</kbd> + <kbd>m</kbd>                               | Layout: Main Vertical     |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Show daily todos [tdo][1] |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                               | Pending todos [tdo][1]    |
 | <kbd>Alt</kbd> + <kbd>N</kbd>                               | Search all notes [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>o</kbd>                               | Open floating terminal    |
 | <kbd>Alt</kbd> + <kbd>p</kbd>                               | Last active pane          |
@@ -103,7 +103,6 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>R</kbd>                               | Open README               |
 | <kbd>Alt</kbd> + <kbd>s</kbd>                               | Show all panes            |
 | <kbd>Alt</kbd> + <kbd>t</kbd>                               | Session manager [tea][1]  |
-| <kbd>Alt</kbd> + <kbd>T</kbd>                               | Show all pending [tdo][1] |
 | <kbd>Alt</kbd> + <kbd>w</kbd>                               | Move pane to new window   |
 | <kbd>Alt</kbd> + <kbd>x</kbd>                               | Close pane                |
 | <kbd>Alt</kbd> + <kbd>y</kbd>                               | Copy mode                 |
