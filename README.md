@@ -77,7 +77,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Shift + D</kbd>                       | Detach                    |
 | <kbd>Alt</kbd> + <kbd>Shift + E</kbd>                       | Layout: Even Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + H/J/K/L</kbd>                 | Move pane in direction    |
-| <kbd>Alt</kbd> + <kbd>Shift + I</kbd>                       | Open tilit keybindings    |
+| <kbd>Alt</kbd> + <kbd>Shift + I</kbd>                       | Open tilit README         |
 | <kbd>Alt</kbd> + <kbd>Shift + M</kbd>                       | Layout: Main Horizontal   |
 | <kbd>Alt</kbd> + <kbd>Shift + R</kbd>                       | Rotate window             |
 | <kbd>Alt</kbd> + <kbd>Shift + T</kbd>                       | Layout: Tiled             |

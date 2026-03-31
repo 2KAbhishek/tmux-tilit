@@ -145,7 +145,7 @@ tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
 tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
 tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
 tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
-tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/docs/keybindings.md"
+tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
 tmux $bind "${mod}R" rotate-window
 tmux $bind "${mod}X" kill-window
 
