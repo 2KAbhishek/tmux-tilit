@@ -114,13 +114,6 @@ bind_move "${mod}$(char_at $shiftnum 7)" 7
 bind_move "${mod}$(char_at $shiftnum 8)" 8
 bind_move "${mod}$(char_at $shiftnum 9)" 9
 
-# Switch layout
-bind_layout "${mod}e" 'even-vertical'
-bind_layout "${mod}E" 'even-horizontal'
-bind_layout "${mod}m" 'main-vertical'
-bind_layout "${mod}M" 'main-horizontal'
-bind_layout "${mod}T" 'tiled'
-
 tmux $bind "${mod}${left}" resize-pane -L 10
 tmux $bind "${mod}${down}" resize-pane -D 5
 tmux $bind "${mod}${up}" resize-pane -U 10
@@ -139,40 +132,44 @@ tmux $bind "${mod}[" previous-window
 tmux $bind "${mod}]" next-window
 tmux $bind "${mod}\`" last-window
 
-tmux $bind "${mod}C" customize-mode
-tmux $bind "${mod}D" detach-client
+tmux $bind "${mod}${h}" select-pane -L
 tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
+tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
+tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
+tmux $bind "${mod}${l}" select-pane -R
 tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
-tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
-tmux $bind "${mod}R" rotate-window
-tmux $bind "${mod}X" kill-window
 
 tmux $bind "${mod}a" command-prompt
 tmux $bind "${mod}A" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "copilot"
 tmux $bind "${mod}b" set-option status
 tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"
+tmux $bind "${mod}C" customize-mode
 tmux $bind "${mod}d" select-pane -t '{bottom-right}' \\\; split-pane "bash -c dexe --wait-before-exit"
+tmux $bind "${mod}D" detach-client
+bind_layout "${mod}e" 'even-vertical'
+bind_layout "${mod}E" 'even-horizontal'
 tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pane_id}\""
 tmux $bind "${mod}F" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR \"\$(fzf)\""
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
-tmux $bind "${mod}${h}" select-pane -L
-tmux $bind "${mod}${j}" select-pane -D
-tmux $bind "${mod}${k}" select-pane -U
-tmux $bind "${mod}${l}" select-pane -R
 tmux $bind "${mod}i" setw synchronize-panes\\\; display-message "Synchronize panes #{?pane_synchronized,on,off}"
+tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
+bind_layout "${mod}m" 'main-vertical'
+bind_layout "${mod}M" 'main-horizontal'
 tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -t"
 tmux $bind "${mod}N" display-popup -w "80%" -h "80%" -d "$NOTES_DIR" -E "tdo -f"
 tmux $bind "${mod}o" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$SHELL"
 tmux $bind "${mod}p" last-pane
 tmux $bind "${mod}q" kill-session
 tmux $bind "${mod}r" source-file $config_path\\\; display-message "Config Reloaded"
-tmux $bind "${mod}R" display-popup -w "90%" -h "90%" -E "$EDITOR README.md"
+tmux $bind "${mod}R" rotate-window
 tmux $bind "${mod}s" choose-tree
 tmux $bind "${mod}t" run-shell "tea"
+bind_layout "${mod}T" 'tiled'
 tmux $bind "${mod}w" break-pane
 tmux $bind "${mod}x" kill-pane
+tmux $bind "${mod}X" kill-window
 tmux $bind "${mod}y" copy-mode
 tmux $bind "${mod}z" resize-pane -Z
 
