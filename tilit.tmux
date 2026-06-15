@@ -194,6 +194,8 @@ tmux bind C-l send-keys 'C-l'
 tmux bind-key -T copy-mode-vi 'v' send -X begin-selection
 tmux bind-key -T copy-mode-vi 'y' send -X copy-selection
 tmux bind-key -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
+tmux bind-key -T copy-mode-vi "${mod}y" send-keys -X cancel
+tmux bind-key -T copy-mode "${mod}y" send-keys -X cancel
 
 # Autorefresh layout after deleting a pane.
 tmux set-hook -g after-split-window "select-layout; select-layout -E"

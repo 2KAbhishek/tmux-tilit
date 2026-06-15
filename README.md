@@ -106,7 +106,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>w</kbd>            | Move pane to new window  |
 | <kbd>Alt</kbd> + <kbd>x</kbd>            | Close pane               |
 | <kbd>Alt</kbd> + <kbd>X</kbd>            | Close window             |
-| <kbd>Alt</kbd> + <kbd>y</kbd>            | Copy mode                |
+| <kbd>Alt</kbd> + <kbd>y</kbd>            | Toggle copy mode         |
 | <kbd>Alt</kbd> + <kbd>z</kbd>            | Layout: Zoom             |
 | <kbd>Shift</kbd> + <kbd>Left/Right</kbd> | Focus prev/next window   |
 
@@ -123,12 +123,13 @@ tmux-tilit sets up keybindings that work with the tmux `prefix` key:
 
 #### Copy Mode Bindings
 
-Enable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
+Enable/Disable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 
 > This mode supports vi navigation keys by default
 
 | Keybinding                     | Action                      |
 | ------------------------------ | --------------------------- |
+| <kbd>Alt</kbd> + <kbd>y</kbd>  | Toggle/Exit copy mode       |
 | <kbd>y</kbd>                   | Copy                        |
 | <kbd>Ctrl</kbd> + <kbd>v</kbd> | Toggle block/rectangle mode |
 | <kbd>v</kbd>                   | Start selection             |
