@@ -64,7 +64,9 @@ config_path="${config:-$HOME/.tmux.conf}"
 plugin_path=${TMUX_PLUGIN_MANAGER_PATH:-$HOME/.config/tmux/plugins}
 
 char_at() {
-    echo $1 | cut -c $2
+    local str="$1"
+    local idx="$2"
+    echo "${str:$((idx - 1)):1}"
 }
 
 # Bind keys to switch between workspaces.
