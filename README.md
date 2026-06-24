@@ -152,6 +152,24 @@ If your config is in a different location, you can set:
 set -g @tilit-config "$HOME/.config/tmux/tmux.conf"
 ```
 
+#### `autotiling` for dynamic layout splits
+
+By default, autotiling is enabled (`'on'`). This automatically splits panes horizontally or vertically based on active pane dimensions (similar to i3/sway autotiling).
+
+To disable this behavior:
+
+```bash
+set -g @tilit-autotiling 'off'
+```
+
+You can customize the aspect ratio threshold (default is `2.0`). Lower values trigger horizontal splits more easily:
+
+```bash
+set -g @tilit-splitratio '1.7'
+```
+
+> Note: For the best autotiling experience, it is recommended to unset `@tilit-layout` (or leave it empty) so that tmux does not force a specific static layout after splitting.
+
 #### `easymode` for arrow key navigation
 
 To navigate using arrow keys, you can enable easy mode with: `set -g @tilit-easymode 'on'`

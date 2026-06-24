@@ -3,9 +3,12 @@
 # shellcheck disable=SC2086
 
 # Read user options.
-for opt in easymode layout navigator prefix mod shiftnum config; do
+for opt in easymode layout navigator prefix mod shiftnum config autotiling splitratio; do
     export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
 done
+
+autotiling="${autotiling:-on}"
+splitratio="${splitratio:-2.0}"
 
 # Determine "arrow types".
 if [ "${easymode:-}" = "on" ]; then
@@ -69,6 +72,17 @@ char_at() {
     echo "${str:$((idx - 1)):1}"
 }
 
+to_ratio_int() {
+    local val="$1"
+    if [[ "$val" != *.* ]]; then
+        val="${val}.0"
+    fi
+    local int_part="${val%%.*}"
+    local frac_part="${val#*.}"
+    local first_dec="${frac_part:0:1}"
+    echo "${int_part}${first_dec}"
+}
+
 # Bind keys to switch between workspaces.
 bind_switch() {
     tmux $bind "$1" if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
@@ -125,7 +139,14 @@ tmux $bind "${mod}_" resize-pane -D 10
 tmux $bind "${mod}=" resize-pane -R 20
 tmux $bind "${mod}+" resize-pane -U 10
 
-tmux $bind "${mod}enter" split-pane -c "#{pane_current_path}"
+if [ "$autotiling" = "on" ]; then
+    ratio_int=$(to_ratio_int "$splitratio")
+    tmux $bind "${mod}enter" if-shell '[ "$(expr #{pane_width} \* 10)" -ge "$(expr #{pane_height} \* '"$ratio_int"')" ]' \
+        'split-pane -h -c "#{pane_current_path}"' \
+        'split-pane -v -c "#{pane_current_path}"'
+else
+    tmux $bind "${mod}enter" split-pane -c "#{pane_current_path}"
+fi
 tmux $bind "${mod}/" split-pane -v -c "#{pane_current_path}"
 tmux $bind "${mod}\\" split-pane -h -c "#{pane_current_path}"
 
@@ -200,5 +221,10 @@ tmux bind-key -T copy-mode-vi "${mod}y" send-keys -X cancel
 tmux bind-key -T copy-mode "${mod}y" send-keys -X cancel
 
 # Autorefresh layout after deleting a pane.
-tmux set-hook -g after-split-window "select-layout; select-layout -E"
-tmux set-hook -g pane-exited "select-layout; select-layout -E"
+if [ "$autotiling" = "on" ]; then
+    tmux set-hook -g after-split-window "select-layout -E"
+    tmux set-hook -g pane-exited "select-layout -E"
+else
+    tmux set-hook -g after-split-window "select-layout; select-layout -E"
+    tmux set-hook -g pane-exited "select-layout; select-layout -E"
+fi
