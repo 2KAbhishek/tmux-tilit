@@ -164,7 +164,7 @@ tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
 tmux $bind "${mod}${l}" select-pane -R
 tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
 
-tmux $bind "${mod}a" command-prompt
+tmux $bind "${mod}a" run-shell "tea -a"
 tmux $bind "${mod}A" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "opencode"
 tmux $bind "${mod}b" set-option status
 tmux $bind "${mod}c" display-popup -w "90%" -h "90%" -E "$EDITOR $config_path"

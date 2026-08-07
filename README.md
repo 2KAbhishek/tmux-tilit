@@ -77,7 +77,7 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>Arrow Keys</kbd>   | Resize pane in direction |
 | <kbd>Alt</kbd> + <kbd>h/j/k/l</kbd>      | Focus pane in direction  |
 | <kbd>Alt</kbd> + <kbd>H/J/K/L</kbd>      | Move pane in direction   |
-| <kbd>Alt</kbd> + <kbd>a</kbd>            | Command mode             |
+| <kbd>Alt</kbd> + <kbd>a</kbd>            | AI Agent Picker [tea][4] |
 | <kbd>Alt</kbd> + <kbd>A</kbd>            | Opencode CLI             |
 | <kbd>Alt</kbd> + <kbd>b</kbd>            | Toggle status bar        |
 | <kbd>Alt</kbd> + <kbd>c</kbd>            | Edit config              |
