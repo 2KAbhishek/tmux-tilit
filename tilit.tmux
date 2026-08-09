@@ -2,9 +2,17 @@
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
 
+get_tmux_option() {
+    local option="$1"
+    local default="$2"
+    local val
+    val="$(tmux show-option -gqv "$option")"
+    printf '%s\n' "${val:-$default}"
+}
+
 # Read user options.
 for opt in easymode layout navigator prefix mod shiftnum config autotiling splitratio; do
-    export "$opt"="$(tmux show-option -gv @tilit-"$opt" 2>/dev/null)"
+    export "$opt"="$(get_tmux_option "@tilit-$opt" "")"
 done
 
 autotiling="${autotiling:-on}"
@@ -100,7 +108,7 @@ bind_layout() {
 }
 
 # Base index aware mapping
-if [ "$(tmux show-option -gv base-index)" = "1" ]; then
+if [ "$(get_tmux_option "base-index" "0")" = "1" ]; then
     bind_switch "${mod}0" 10
     bind_move "${mod}$(char_at "$shiftnum" 10)" 10
 else
