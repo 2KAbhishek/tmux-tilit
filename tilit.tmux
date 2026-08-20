@@ -2,12 +2,24 @@
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
 
+declare -A TILIT_OPTIONS
+while IFS=' ' read -r opt val; do
+    TILIT_OPTIONS["$opt"]="$val"
+done < <(tmux show-options -g 2>/dev/null | grep "^@tilit-")
+
 get_tmux_option() {
     local option="$1"
     local default="$2"
-    local val
-    val="$(tmux show-option -gqv "$option")"
-    printf '%s\n' "${val:-$default}"
+    local val="${TILIT_OPTIONS[$option]}"
+    if [ -n "$val" ]; then
+        val="${val#\"}"
+        val="${val%\"}"
+        val="${val#\'}"
+        val="${val%\'}"
+        printf '%s\n' "$val"
+    else
+        printf '%s\n' "$default"
+    fi
 }
 
 # Read user options.
@@ -110,10 +122,10 @@ bind_layout() {
 # Base index aware mapping
 if [ "$(get_tmux_option "base-index" "0")" = "1" ]; then
     bind_switch "${mod}0" 10
-    bind_move "${mod}$(char_at "$shiftnum" 10)" 10
+    bind_move "${mod}${shiftnum:9:1}" 10
 else
     bind_switch "${mod}0" 0
-    bind_move "${mod}$(char_at "$shiftnum" 10)" 0
+    bind_move "${mod}${shiftnum:9:1}" 0
 fi
 
 # Switch to workspace
@@ -128,15 +140,15 @@ bind_switch "${mod}8" 8
 bind_switch "${mod}9" 9
 
 # Move pane to workspace
-bind_move "${mod}$(char_at $shiftnum 1)" 1
-bind_move "${mod}$(char_at $shiftnum 2)" 2
-bind_move "${mod}$(char_at $shiftnum 3)" 3
-bind_move "${mod}$(char_at $shiftnum 4)" 4
-bind_move "${mod}$(char_at $shiftnum 5)" 5
-bind_move "${mod}$(char_at $shiftnum 6)" 6
-bind_move "${mod}$(char_at $shiftnum 7)" 7
-bind_move "${mod}$(char_at $shiftnum 8)" 8
-bind_move "${mod}$(char_at $shiftnum 9)" 9
+bind_move "${mod}${shiftnum:0:1}" 1
+bind_move "${mod}${shiftnum:1:1}" 2
+bind_move "${mod}${shiftnum:2:1}" 3
+bind_move "${mod}${shiftnum:3:1}" 4
+bind_move "${mod}${shiftnum:4:1}" 5
+bind_move "${mod}${shiftnum:5:1}" 6
+bind_move "${mod}${shiftnum:6:1}" 7
+bind_move "${mod}${shiftnum:7:1}" 8
+bind_move "${mod}${shiftnum:8:1}" 9
 
 tmux $bind "${mod}${left}" resize-pane -L 10
 tmux $bind "${mod}${down}" resize-pane -D 5
