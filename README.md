@@ -37,7 +37,7 @@ tmux-tilit brings tiling window manager features and intuitive keybindings to yo
 ## Features
 
 - **Intuitive Tiling Management**: Split and arrange panes, layouts, workspaces with intuitive keybindings similar to tiling window managers
-- **Vim/Neovim Integration**: Seamless navigation between vim/neovim splits and tmux panes with Navigator support
+- **Vim/Neovim Integration**: Seamless navigation between vim/neovim splits and tmux panes
 - **External Tools**: Integration with utilities like lazygit, extrakto for text grabbing and [tdo](https://github.com/2KAbhishek/tdo) for notes management
 - **Session Management**: Integration with [tea](https://github.com/2KAbhishek/tmux-tea) for session management
 - **Prefix Mode**: Optional prefix mode for compatibility with window managers that use Alt as default modifier
@@ -212,12 +212,10 @@ set -g @tilit-mod 'C-'
 
 #### `navigator` for integrating with vim/neovim
 
-To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5].
-
-Seamlessly navigate across vim/neovim splits and tmux panes. Enabled by default (`'on'`):
+Seamlessly navigate across vim/neovim splits and tmux panes without requiring heavy third-party plugins. Enabled by default (`'on'`):
 
 ```bash
-# Default: Navigate using Ctrl + hjkl (vim-tmux-navigator / Navigator.nvim)
+# Default: Navigate using Ctrl + hjkl
 set -g @tilit-navigator 'on'
 
 # Navigate using Alt + hjkl (matches tilit-mod without capturing Ctrl keys)
@@ -226,12 +224,56 @@ set -g @tilit-navigator 'alt' # or 'mod' / 'M-'
 # Disable seamless vim navigation (standard tmux pane switching only)
 set -g @tilit-navigator 'off'
 
-# Disable built-in pane navigation (e.g. when using sunaku/tmux-navigate)
+# Disable built-in pane navigation (when managing pane navigation externally)
 set -g @tilit-navigator 'none'
 ```
 
-[4]: https://github.com/numToStr/Navigator.nvim
-[5]: https://github.com/christoomey/vim-tmux-navigator
+<details>
+<summary><b>Neovim Setup</b></summary>
+
+Add the following to your Neovim config or use [homegrown.nvim's tmux module](https://github.com/2kabhishek/homegrown.nvim/)
+
+```lua
+local function tmux_navigate(direction)
+    local winnr = vim.fn.winnr()
+    vim.cmd('wincmd ' .. direction)
+    if winnr == vim.fn.winnr() and vim.env.TMUX then
+        local tmux_dir = { h = 'L', j = 'D', k = 'U', l = 'R' }
+        vim.fn.system('tmux select-pane -' .. tmux_dir[direction])
+    end
+end
+
+-- Default: Ctrl + hjkl (or change to '<M-h>', etc. if using @tilit-navigator 'alt')
+vim.keymap.set('n', '<C-h>', function() tmux_navigate('h') end, { silent = true, desc = 'Tmux Navigate Left' })
+vim.keymap.set('n', '<C-j>', function() tmux_navigate('j') end, { silent = true, desc = 'Tmux Navigate Down' })
+vim.keymap.set('n', '<C-k>', function() tmux_navigate('k') end, { silent = true, desc = 'Tmux Navigate Up' })
+vim.keymap.set('n', '<C-l>', function() tmux_navigate('l') end, { silent = true, desc = 'Tmux Navigate Right' })
+```
+
+</details>
+
+<details>
+<summary><b>Vim Setup</b></summary>
+
+Add the following to your `~/.vimrc`:
+
+```vim
+function! s:TmuxNavigate(dir) abort
+    let l:w = winnr()
+    execute 'wincmd ' . a:dir
+    if l:w == winnr() && exists('$TMUX')
+        call system('tmux select-pane -' . get({'h':'L','j':'D','k':'U','l':'R'}, a:dir))
+    endif
+endfunction
+
+" Default: Ctrl + hjkl (or change to '<M-h>', etc. if using @tilit-navigator 'alt')
+nnoremap <silent> <C-h> :call <SID>TmuxNavigate('h')<CR>
+nnoremap <silent> <C-j> :call <SID>TmuxNavigate('j')<CR>
+nnoremap <silent> <C-k> :call <SID>TmuxNavigate('k')<CR>
+nnoremap <silent> <C-l> :call <SID>TmuxNavigate('l')<CR>
+```
+
+</details>
 
 #### `prefix` for integrating with window managers
 
