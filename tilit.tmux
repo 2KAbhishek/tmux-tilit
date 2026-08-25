@@ -41,6 +41,7 @@ for opt in easymode layout navigator prefix mod shiftnum config autotiling split
     export "$opt"="$(get_tmux_option "@tilit-$opt" "")"
 done
 
+navigator="${navigator:-on}"
 autotiling="${autotiling:-on}"
 splitratio="${splitratio:-2.0}"
 
@@ -55,30 +56,6 @@ else
     left='left' down='down' up='up' right='right'
 fi
 
-# Autoselect default layout after creating new window.
-if [ -n "${layout:-}" ]; then
-    tmux set-hook -g window-linked "select-layout \"$layout\"; select-layout -E"
-    tmux select-layout "$layout"
-    tmux select-layout -E
-fi
-
-# If `@tilit-navigator` is on, integrate Ctrl + hjkl with `vim-tmux-navigator`/'Navigator.nvim' configs
-if [ "${navigator:-}" = "on" ]; then
-    is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
-
-    tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
-    tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
-    tmux bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
-    tmux bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
-    tmux bind-key -n C-\\ if-shell "$is_vim" "send-keys C-\\\\" "select-pane -l"
-
-    tmux bind-key -T copy-mode-vi C-h select-pane -L
-    tmux bind-key -T copy-mode-vi C-j select-pane -D
-    tmux bind-key -T copy-mode-vi C-k select-pane -U
-    tmux bind-key -T copy-mode-vi C-l select-pane -R
-    tmux bind-key -T copy-mode-vi C-\\ select-pane -l
-fi
-
 # Determine modifier vs. prefix key.
 if [ -z "${prefix:-}" ]; then
     bind='bind -n'
@@ -91,6 +68,51 @@ fi
 if [ -n "$prefix" ]; then
     tmux bind -n "$prefix" switch-client -T tilit
 fi
+
+# Autoselect default layout after creating new window.
+if [ -n "${layout:-}" ]; then
+    tmux set-hook -g window-linked "select-layout \"$layout\"; select-layout -E"
+    tmux select-layout "$layout"
+    tmux select-layout -E
+fi
+
+# Navigator integration (supports vim-tmux-navigator, Navigator.nvim, smart-splits.nvim)
+is_vim="tmux display-message -p '#{@pane-is-vim}' 2>/dev/null | grep -q 1 || ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
+bind_pane_nav=true
+
+case "${navigator:-}" in
+    on|yes|true|C-|c-|ctrl|Ctrl)
+        tmux bind-key -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+        tmux bind-key -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+        tmux bind-key -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+        tmux bind-key -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+        tmux bind-key -n C-\\ if-shell "$is_vim" "send-keys C-\\\\" "select-pane -l"
+
+        tmux bind-key -T copy-mode-vi C-h select-pane -L
+        tmux bind-key -T copy-mode-vi C-j select-pane -D
+        tmux bind-key -T copy-mode-vi C-k select-pane -U
+        tmux bind-key -T copy-mode-vi C-l select-pane -R
+        tmux bind-key -T copy-mode-vi C-\\ select-pane -l
+        ;;
+    M-|m-|alt|Alt|meta|Meta|mod|\$mod)
+        bind_pane_nav=false
+
+        tmux bind-key -n "${mod}${h}" if-shell "$is_vim" "send-keys ${mod}${h}" "select-pane -L"
+        tmux bind-key -n "${mod}${j}" if-shell "$is_vim" "send-keys ${mod}${j}" "select-pane -D"
+        tmux bind-key -n "${mod}${k}" if-shell "$is_vim" "send-keys ${mod}${k}" "select-pane -U"
+        tmux bind-key -n "${mod}${l}" if-shell "$is_vim" "send-keys ${mod}${l}" "select-pane -R"
+        tmux bind-key -n "${mod}\\" if-shell "$is_vim" "send-keys ${mod}\\\\" "select-pane -l"
+
+        tmux bind-key -T copy-mode-vi "${mod}${h}" select-pane -L
+        tmux bind-key -T copy-mode-vi "${mod}${j}" select-pane -D
+        tmux bind-key -T copy-mode-vi "${mod}${k}" select-pane -U
+        tmux bind-key -T copy-mode-vi "${mod}${l}" select-pane -R
+        tmux bind-key -T copy-mode-vi "${mod}\\" select-pane -l
+        ;;
+    none|manual|custom)
+        bind_pane_nav=false
+        ;;
+esac
 
 # Use US keyboard layout, unless configured
 if [ -z "$shiftnum" ]; then
@@ -189,13 +211,16 @@ tmux $bind "${mod}[" previous-window
 tmux $bind "${mod}]" next-window
 tmux $bind "${mod}\`" last-window
 
-tmux $bind "${mod}${h}" select-pane -L
+if [ "$bind_pane_nav" = "true" ]; then
+    tmux $bind "${mod}${h}" select-pane -L
+    tmux $bind "${mod}${j}" select-pane -D
+    tmux $bind "${mod}${k}" select-pane -U
+    tmux $bind "${mod}${l}" select-pane -R
+fi
+
 tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
-tmux $bind "${mod}${j}" select-pane -D
 tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
-tmux $bind "${mod}${k}" select-pane -U
 tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
-tmux $bind "${mod}${l}" select-pane -R
 tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
 
 tmux $bind "${mod}a" run-shell "tea -a"

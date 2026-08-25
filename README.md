@@ -212,15 +212,23 @@ set -g @tilit-mod 'C-'
 
 #### `navigator` for integrating with vim/neovim
 
-To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5]
+To setup navigation with neovim install [Navigator.nvim][4] and for vim use [vim-tmux-navigator][5].
 
-Then, in your `~/.tmux.conf` add:
+Seamlessly navigate across vim/neovim splits and tmux panes. Enabled by default (`'on'`):
 
 ```bash
+# Default: Navigate using Ctrl + hjkl (vim-tmux-navigator / Navigator.nvim)
 set -g @tilit-navigator 'on'
-```
 
-This will let you seamlessly navigate between vim/neovim splits and tmux panes with <kbd>Ctrl</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>.
+# Navigate using Alt + hjkl (matches tilit-mod without capturing Ctrl keys)
+set -g @tilit-navigator 'alt' # or 'mod' / 'M-'
+
+# Disable seamless vim navigation (standard tmux pane switching only)
+set -g @tilit-navigator 'off'
+
+# Disable built-in pane navigation (e.g. when using sunaku/tmux-navigate)
+set -g @tilit-navigator 'none'
+```
 
 [4]: https://github.com/numToStr/Navigator.nvim
 [5]: https://github.com/christoomey/vim-tmux-navigator
