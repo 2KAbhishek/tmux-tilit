@@ -2,20 +2,34 @@
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
 
+CURRENT_DIR="${BASH_SOURCE[0]%/*}"
+[ "$CURRENT_DIR" = "${BASH_SOURCE[0]}" ] && CURRENT_DIR="."
+
 declare -A TILIT_OPTIONS
 while IFS=' ' read -r opt val; do
     TILIT_OPTIONS["$opt"]="$val"
-done < <(tmux show-options -g 2>/dev/null | grep "^@tilit-")
+done < <(tmux show-options -g 2>/dev/null | grep -E "^(@tilit-|base-index)")
 
 get_tmux_option() {
     local option="$1"
     local default="$2"
     local val="${TILIT_OPTIONS[$option]}"
+    if [ -z "$val" ]; then
+        val="$(tmux show-option -gqv "$option" 2>/dev/null)"
+    fi
     if [ -n "$val" ]; then
         val="${val#\"}"
         val="${val%\"}"
         val="${val#\'}"
         val="${val%\'}"
+        if [[ "$val" =~ ^\$[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
+            local var_name="${val#\$}"
+            val="${!var_name}"
+        elif [[ "$val" == *"\$HOME"* ]]; then
+            val="${val//\$HOME/$HOME}"
+        elif [[ "$val" == "~"* ]]; then
+            val="${val/#\~/$HOME}"
+        fi
         printf '%s\n' "$val"
     else
         printf '%s\n' "$default"
@@ -105,13 +119,13 @@ to_ratio_int() {
 
 # Bind keys to switch between workspaces.
 bind_switch() {
-    tmux $bind "$1" if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
+    tmux $bind "$1" if-shell "tmux select-window -t :$2" "" "new-window -c '#{pane_current_path}' -t :$2"
 }
 
 # Bind keys to move panes between workspaces.
 bind_move() {
     tmux $bind "$1" if-shell "tmux join-pane -t :$2" "" \
-        "new-window -dt :$2; join-pane -t :$2; select-pane -t top-left; kill-pane" \\\; select-layout \\\; select-layout -E
+        "new-window -c '#{pane_current_path}' -dt :$2; join-pane -t :$2; select-pane -t top-left; kill-pane" \\\; select-layout \\\; select-layout -E
 }
 
 # Bind keys to switch layouts
@@ -197,7 +211,7 @@ tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pa
 tmux $bind "${mod}F" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR \"\$(fzf)\""
 tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
 tmux $bind "${mod}i" setw synchronize-panes\\\; display-message "Synchronize panes #{?pane_synchronized,on,off}"
-tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR $plugin_path/tmux-tilit/README.md"
+tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR \"$CURRENT_DIR/README.md\""
 bind_layout "${mod}m" 'main-vertical'
 bind_layout "${mod}M" 'main-horizontal'
 tmux $bind "${mod}n" display-popup -w "90%" -h "90%" -d "$NOTES_DIR" -E "tdo -t"
