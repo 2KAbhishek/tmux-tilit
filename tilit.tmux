@@ -2,8 +2,7 @@
 # shellcheck disable=SC2016
 # shellcheck disable=SC2086
 
-CURRENT_DIR="${BASH_SOURCE[0]%/*}"
-[ "$CURRENT_DIR" = "${BASH_SOURCE[0]}" ] && CURRENT_DIR="."
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 declare -A TILIT_OPTIONS
 while IFS=' ' read -r opt val; do
@@ -218,10 +217,10 @@ if [ "$bind_pane_nav" = "true" ]; then
     tmux $bind "${mod}${l}" select-pane -R
 fi
 
-tmux $bind "${mod}${H}" swap-pane -s '{left-of}'
-tmux $bind "${mod}${J}" swap-pane -s '{down-of}'
-tmux $bind "${mod}${K}" swap-pane -s '{up-of}'
-tmux $bind "${mod}${L}" swap-pane -s '{right-of}'
+tmux $bind "${mod}${H}" run-shell "\"$CURRENT_DIR/scripts/move.sh\" left"
+tmux $bind "${mod}${J}" run-shell "\"$CURRENT_DIR/scripts/move.sh\" down"
+tmux $bind "${mod}${K}" run-shell "\"$CURRENT_DIR/scripts/move.sh\" up"
+tmux $bind "${mod}${L}" run-shell "\"$CURRENT_DIR/scripts/move.sh\" right"
 
 tmux $bind "${mod}a" run-shell "tea -a"
 tmux $bind "${mod}A" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "opencode"
