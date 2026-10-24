@@ -36,9 +36,10 @@ get_tmux_option() {
 }
 
 # Read user options.
-for opt in easymode layout navigator prefix mod shiftnum config autotiling splitratio; do
+for opt in easymode layout navigator prefix mod shiftnum config autotiling splitratio git; do
     export "$opt"="$(get_tmux_option "@tilit-$opt" "")"
 done
+
 
 navigator="${navigator:-on}"
 autotiling="${autotiling:-on}"
@@ -233,7 +234,18 @@ bind_layout "${mod}e" 'even-vertical'
 bind_layout "${mod}E" 'even-horizontal'
 tmux $bind "${mod}f" run-shell "\"$plugin_path/extrakto/scripts/open.sh\" \"#{pane_id}\""
 tmux $bind "${mod}F" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$EDITOR \"\$(fzf)\""
-tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "lazygit"
+git_tool="${git:-}"
+if [ -z "$git_tool" ]; then
+    if command -v repowatch &>/dev/null; then
+        git_tool="repowatch"
+    else
+        git_tool="lazygit"
+    fi
+fi
+tmux $bind "${mod}g" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "$git_tool"
+if command -v repowatch &>/dev/null; then
+    tmux $bind "${mod}G" display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "repowatch -o"
+fi
 tmux $bind "${mod}i" setw synchronize-panes\\\; display-message "Synchronize panes #{?pane_synchronized,on,off}"
 tmux $bind "${mod}I" display-popup -w "90%" -h "90%" -E "$EDITOR \"$CURRENT_DIR/README.md\""
 bind_layout "${mod}m" 'main-vertical'

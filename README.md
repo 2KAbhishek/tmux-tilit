@@ -38,7 +38,7 @@ tmux-tilit brings tiling window manager features and intuitive keybindings to yo
 
 - **Intuitive Tiling Management**: Split and arrange panes, layouts, workspaces with intuitive keybindings similar to tiling window managers
 - **Vim/Neovim Integration**: Seamless navigation between vim/neovim splits and tmux panes
-- **External Tools**: Integration with utilities like lazygit, extrakto for text grabbing and [tdo](https://github.com/2KAbhishek/tdo) for notes management
+- **External Tools**: Integration with utilities like [repowatch](https://github.com/2KAbhishek/repowatch), lazygit, extrakto for text grabbing and [tdo](https://github.com/2KAbhishek/tdo) for notes management
 - **Session Management**: Integration with [tea](https://github.com/2KAbhishek/tmux-tea) for session management
 - **Prefix Mode**: Optional prefix mode for compatibility with window managers that use Alt as default modifier
 - **International Keyboard Support**: Configurable shift+number mappings for different keyboard layouts
@@ -88,7 +88,8 @@ set -g @plugin '2kabhishek/tmux-tilit'
 | <kbd>Alt</kbd> + <kbd>E</kbd>            | Layout: Even Horizontal  |
 | <kbd>Alt</kbd> + <kbd>f</kbd>            | Text grab [extrakto][2]  |
 | <kbd>Alt</kbd> + <kbd>F</kbd>            | Fuzzy edit files         |
-| <kbd>Alt</kbd> + <kbd>g</kbd>            | Open lazygit             |
+| <kbd>Alt</kbd> + <kbd>g</kbd>            | Open git ([repowatch][5] / lazygit) |
+| <kbd>Alt</kbd> + <kbd>G</kbd>            | Multi-repo overview [repowatch][5]  |
 | <kbd>Alt</kbd> + <kbd>i</kbd>            | Synchronize pane inputs  |
 | <kbd>Alt</kbd> + <kbd>I</kbd>            | Open tilit README        |
 | <kbd>Alt</kbd> + <kbd>m</kbd>            | Layout: Main Vertical    |
@@ -139,6 +140,7 @@ Enable/Disable copy mode by pressing <kbd>Alt</kbd> + <kbd>y</kbd>:
 [2]: https://github.com/laktak/extrakto
 [3]: https://github.com/2KAbhishek/dexe
 [4]: https://github.com/2KAbhishek/tmux-tea
+[5]: https://github.com/2KAbhishek/repowatch
 
 ### Customizing tmux-tilit
 
@@ -209,6 +211,18 @@ set -g @tilit-mod 'C-'
 ```
 
 `@tilit-mod` is used only in non-prefix mode.
+
+#### `git` for custom git / multi-repo tool
+
+By default, tmux-tilit checks if [repowatch][5] is installed and uses it for `<Alt> + g`. When inside a single Git repository, `repowatch` launches `lazygit` directly; when inside a workspace directory containing multiple repos, it opens the interactive multi-repo dashboard. If `repowatch` is not installed, it falls back to `lazygit`.
+
+`<Alt> + G` opens the `repowatch` multi-repo overview even if you are inside a Git repository.
+
+You can customize your preferred git tool:
+
+```bash
+set -g @tilit-git 'repowatch' # or 'lazygit', 'gitui', 'tig'
+```
 
 #### `navigator` for integrating with vim/neovim
 
@@ -330,6 +344,7 @@ Hit the ⭐ button if you found this useful.
 
 ### 🔍 More Info
 
+- [repowatch](https://github.com/2kabhishek/repowatch) — Interactive multi-repo monitor & git dashboard
 - [tmux-tea](https://github.com/2kabhishek/tmux-tea) — Simple and powerful tmux session manager
 - [tmux2k](https://github.com/2kabhishek/tmux2k) — Makes your tmux statusbar pretty!
 
